@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpUserMapper">
+    <resultMap id="BaseResultMap" type="model.EfpUser">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="login_nums" property="loginNums" jdbcType="INTEGER"/>
+        <result column="login_time" property="loginTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_user" property="modifyUser" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="invite_code" property="inviteCode" jdbcType="VARCHAR"/>
+        <result column="modify_description" property="modifyDescription" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, phone, email, password, type, status, create_time, create_user, login_nums,
+    login_time, modify_time, modify_user, version, invite_code, modify_description
+    from cd_efp_user
+  </select>
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpUser">
+        select id, phone, email, password, type, status, create_time, create_user, login_nums,
+        login_time, modify_time, modify_user, version, invite_code, modify_description
+        from cd_efp_user
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="phone != null">and phone = #{phone,jdbcType=VARCHAR}</if>
+            <if test="email != null">and email = #{email,jdbcType=VARCHAR}</if>
+            <if test="password != null">and password = #{password,jdbcType=VARCHAR}</if>
+            <if test="type != null">and type = #{type,jdbcType=INTEGER}</if>
+            <if test="status != null">and status = #{status,jdbcType=INTEGER}</if>
+            <if test="createTime != null">and reate_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="createUser != null">and create_user = #{createUser,jdbcType=VARCHAR}</if>
+            <if test="loginNums != null">and login_nums = #{loginNums,jdbcType=INTEGER}</if>
+            <if test="loginTime != null">and login_time = #{loginTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyTime != null">and modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyUser != null">and modify_user = #{modifyUser,jdbcType=VARCHAR}</if>
+            <if test="version != null">and version = #{version,jdbcType=INTEGER}</if>
+            <if test="inviteCode != null">and invite_code = #{inviteCode,jdbcType=VARCHAR}</if>
+            <if test="modifyDescription != null">and modify_description = #{modifyDescription,jdbcType=LONGVARCHAR}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpUser" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="password != null">password,</if>
+            <if test="type != null">type,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="loginNums != null">login_nums,</if>
+            <if test="loginTime != null">login_time,</if>
+            <if test="modifyTime != null">modify_time,</if>
+            <if test="modifyUser != null">modify_user,</if>
+            <if test="version != null">version,</if>
+            <if test="inviteCode != null">invite_code,</if>
+            <if test="modifyDescription != null">modify_description,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
+            <if test="email != null">#{email,jdbcType=VARCHAR},</if>
+            <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=INTEGER},</if>
+            <if test="status != null">#{status,jdbcType=INTEGER},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="createUser != null">#{createUser,jdbcType=VARCHAR},</if>
+            <if test="loginNums != null">#{loginNums,jdbcType=INTEGER},</if>
+            <if test="loginTime != null">#{loginTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">#{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyUser != null">#{modifyUser,jdbcType=VARCHAR},</if>
+            <if test="version != null">#{version,jdbcType=INTEGER},</if>
+            <if test="inviteCode != null">#{inviteCode,jdbcType=VARCHAR},</if>
+            <if test="modifyDescription != null">#{modifyDescription,jdbcType=LONGVARCHAR},</if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpUser">
+        update cd_efp_user
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="phone != null and phone != ''">phone = #{phone,jdbcType=VARCHAR},</if>
+            <if test="email != null and email != ''">email = #{email,jdbcType=VARCHAR},</if>
+            <if test="password != null and password != ''">password = #{password,jdbcType=VARCHAR},</if>
+            <if test="type != null and type != ''">type = #{type,jdbcType=INTEGER},</if>
+            <if test="status != null and status != ''">status = #{status,jdbcType=INTEGER},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="createUser != null and createUser != ''">create_user = #{createUser,jdbcType=VARCHAR},</if>
+            <if test="loginNums != null and loginNums != ''">login_nums = #{loginNums,jdbcType=INTEGER},</if>
+            <if test="loginTime != null and loginTime != ''">login_time = #{loginTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null and modifyTime != ''">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyUser != null and modifyUser != ''">modify_user = #{modifyUser,jdbcType=VARCHAR},</if>
+            <if test="version != null and version != ''">version = #{version,jdbcType=INTEGER},</if>
+            <if test="inviteCode != null and inviteCode != ''">invite_code = #{inviteCode,jdbcType=VARCHAR},</if>
+            <if test="modifyDescription != null and modifyDescription != ''">modify_description =
+                #{modifyDescription,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

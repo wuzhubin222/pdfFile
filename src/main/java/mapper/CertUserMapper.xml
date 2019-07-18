@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.CertUserMapper">
+    <resultMap id="BaseResultMap" type="model.CertUser">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="app_id" property="appId" jdbcType="VARCHAR"/>
+        <result column="app_secret" property="appSecret" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cert_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select * from cert_user
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.CertUser">
+        select *
+        from cert_user
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyTime != null">and modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+            <if test="appId != null">and app_id = #{appId,jdbcType=VARCHAR}</if>
+            <if test="appSecret != null">and app_secret = #{appSecret,jdbcType=VARCHAR}</if>
+            <if test="type != null">and type = #{type,jdbcType=INTEGER}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="model.CertUser" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cert_user
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="modifyTime != null">modify_time,</if>
+            <if test="appId != null">app_id,</if>
+            <if test="appSecret != null">app_secret,</if>
+            <if test="type != null">type,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">#{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="appId != null">#{appId,jdbcType=VARCHAR},</if>
+            <if test="appSecret != null">#{appSecret,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=INTEGER},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.CertUser">
+        update cert_user
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null and modifyTime != ''">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="appId != null and appId != ''">app_id = #{appId,jdbcType=VARCHAR},</if>
+            <if test="appSecret != null and appSecret != ''">app_secret = #{appSecret,jdbcType=VARCHAR},</if>
+            <if test="type != null and type != ''">type = #{type,jdbcType=INTEGER},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

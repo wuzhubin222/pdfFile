@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpInvoiceMapper">
+    <resultMap id="BaseResultMap" type="model.EfpInvoice">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="wspzhm" property="wspzhm" jdbcType="VARCHAR"/>
+        <result column="fp_jym" property="fpJym" jdbcType="VARCHAR"/>
+        <result column="jqbh" property="jqbh" jdbcType="VARCHAR"/>
+        <result column="fpdm" property="fpdm" jdbcType="VARCHAR"/>
+        <result column="fphm" property="fphm" jdbcType="VARCHAR"/>
+        <result column="kprq" property="kprq" jdbcType="DATE"/>
+        <result column="hjje" property="hjje" jdbcType="DECIMAL"/>
+        <result column="sl" property="sl" jdbcType="DECIMAL"/>
+        <result column="hjse" property="hjse" jdbcType="DECIMAL"/>
+        <result column="gfsh" property="gfsh" jdbcType="VARCHAR"/>
+        <result column="gfmc" property="gfmc" jdbcType="VARCHAR"/>
+        <result column="gfdz_dh" property="gfdzDh" jdbcType="VARCHAR"/>
+        <result column="gfyhmc_yhzh" property="gfyhmcYhzh" jdbcType="VARCHAR"/>
+        <result column="xfsh" property="xfsh" jdbcType="VARCHAR"/>
+        <result column="xfmc" property="xfmc" jdbcType="VARCHAR"/>
+        <result column="xfdz_dh" property="xfdzDh" jdbcType="VARCHAR"/>
+        <result column="xfyhmc_yhzh" property="xfyhmcYhzh" jdbcType="VARCHAR"/>
+        <result column="swjgdm" property="swjgdm" jdbcType="VARCHAR"/>
+        <result column="swjgmc" property="swjgmc" jdbcType="VARCHAR"/>
+        <result column="mw" property="mw" jdbcType="VARCHAR"/>
+        <result column="zf_bz" property="zfBz" jdbcType="INTEGER"/>
+        <result column="skr" property="skr" jdbcType="VARCHAR"/>
+        <result column="fhr" property="fhr" jdbcType="VARCHAR"/>
+        <result column="kpr" property="kpr" jdbcType="VARCHAR"/>
+        <result column="tsnsrsbh" property="tsnsrsbh" jdbcType="VARCHAR"/>
+        <result column="bz" property="bz" jdbcType="VARCHAR"/>
+        <result column="biz_num" property="bizNum" jdbcType="VARCHAR"/>
+        <result column="sp_user" property="spUser" jdbcType="VARCHAR"/>
+        <result column="czy_id" property="czyId" jdbcType="VARCHAR"/>
+        <result column="phone_no" property="phoneNo" jdbcType="VARCHAR"/>
+        <result column="skm" property="skm" jdbcType="VARCHAR"/>
+        <result column="csm_unionid" property="csmUnionid" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_invoice
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, wspzhm, fp_jym, jqbh, fpdm, fphm, kprq, hjje, sl, hjse, gfsh, gfmc, gfdz_dh, 
+    gfyhmc_yhzh, xfsh, xfmc, xfdz_dh, xfyhmc_yhzh, swjgdm, swjgmc, mw, zf_bz, skr, fhr, 
+    kpr, tsnsrsbh, bz, biz_num, sp_user, czy_id, phone_no, skm, create_time
+    from cd_efp_invoice
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpInvoice">
+        select id, wspzhm, fp_jym, jqbh, fpdm, fphm, kprq, hjje, sl, hjse, gfsh, gfmc, gfdz_dh,
+        gfyhmc_yhzh, xfsh, xfmc, xfdz_dh, xfyhmc_yhzh, swjgdm, swjgmc, mw, zf_bz, skr, fhr,
+        kpr, tsnsrsbh, bz, biz_num, sp_user, czy_id, phone_no, skm, create_time
+        from cd_efp_invoice
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="wspzhm != null">and wspzhm = #{wspzhm,jdbcType=VARCHAR}</if>
+            <if test="fpJym != null">and fp_jym = #{fpJym,jdbcType=VARCHAR}</if>
+            <if test="jqbh != null">and jqbh = #{jqbh,jdbcType=VARCHAR}</if>
+            <if test="fpdm != null">and fpdm = #{fpdm,jdbcType=VARCHAR}</if>
+            <if test="fphm != null">and fphm = #{fphm,jdbcType=VARCHAR}</if>
+            <if test="kprq != null">and kprq = #{kprq,jdbcType=DATE}</if>
+            <if test="hjje != null">and hjje = #{hjje,jdbcType=DECIMAL}</if>
+            <if test="sl != null">and sl = #{sl,jdbcType=DECIMAL}</if>
+            <if test="hjse != null">and hjse = #{hjse,jdbcType=DECIMAL}</if>
+            <if test="gfsh != null">and gfsh = #{gfsh,jdbcType=VARCHAR}</if>
+            <if test="gfmc != null">and gfmc = #{gfmc,jdbcType=VARCHAR}</if>
+            <if test="gfdzDh != null">and gfdz_dh = #{gfdzDh,jdbcType=VARCHAR}</if>
+            <if test="gfyhmcYhzh != null">and gfyhmc_yhzh = #{gfyhmcYhzh,jdbcType=VARCHAR}</if>
+            <if test="xfsh != null">and xfsh = #{xfsh,jdbcType=VARCHAR}</if>
+            <if test="xfmc != null">and xfmc = #{xfmc,jdbcType=VARCHAR}</if>
+            <if test="xfdzDh != null">and xfdz_dh = #{xfdzDh,jdbcType=VARCHAR}</if>
+            <if test="xfyhmcYhzh != null">and xfyhmc_yhzh = #{xfyhmcYhzh,jdbcType=VARCHAR}</if>
+            <if test="swjgdm != null">and swjgdm = #{swjgdm,jdbcType=VARCHAR}</if>
+            <if test="swjgmc != null">and swjgmc = #{swjgmc,jdbcType=VARCHAR}</if>
+            <if test="mw != null">and mw = #{mw,jdbcType=VARCHAR}</if>
+            <if test="zfBz != null">and zf_bz = #{zfBz,jdbcType=INTEGER}</if>
+            <if test="skr != null">and skr = #{skr,jdbcType=VARCHAR}</if>
+            <if test="fhr != null">and fhr = #{fhr,jdbcType=VARCHAR}</if>
+            <if test="kpr != null">and kpr = #{kpr,jdbcType=VARCHAR}</if>
+            <if test="tsnsrsbh != null">and tsnsrsbh = #{tsnsrsbh,jdbcType=VARCHAR}</if>
+            <if test="bz != null">and bz = #{bz,jdbcType=VARCHAR}</if>
+            <if test="bizNum != null">and biz_num = #{bizNum,jdbcType=VARCHAR}</if>
+            <if test="spUser != null">and sp_user = #{spUser,jdbcType=VARCHAR}</if>
+            <if test="czyId != null">and czy_id = #{czyId,jdbcType=VARCHAR}</if>
+            <if test="phoneNo != null">and phone_no = #{phoneNo,jdbcType=VARCHAR}</if>
+            <if test="skm != null">and skm = #{skm,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+        ORDER by create_time desc;
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpInvoice" useGeneratedKeys="true">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into cd_efp_invoice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="wspzhm != null">wspzhm,</if>
+            <if test="fpJym != null">fp_jym,</if>
+            <if test="jqbh != null">jqbh,</if>
+            <if test="fpdm != null">fpdm,</if>
+            <if test="fphm != null">fphm,</if>
+            <if test="kprq != null">kprq,</if>
+            <if test="hjje != null">hjje,</if>
+            <if test="sl != null">sl,</if>
+            <if test="hjse != null">hjse,</if>
+            <if test="gfsh != null">gfsh,</if>
+            <if test="gfmc != null">gfmc,</if>
+            <if test="gfdzDh != null">gfdz_dh,</if>
+            <if test="gfyhmcYhzh != null">gfyhmc_yhzh,</if>
+            <if test="xfsh != null">xfsh,</if>
+            <if test="xfmc != null">xfmc,</if>
+            <if test="xfdzDh != null">xfdz_dh,</if>
+            <if test="xfyhmcYhzh != null">xfyhmc_yhzh,</if>
+            <if test="swjgdm != null">swjgdm,</if>
+            <if test="swjgmc != null">swjgmc,</if>
+            <if test="mw != null">mw,</if>
+            <if test="zfBz != null">zf_bz,</if>
+            <if test="skr != null">skr,</if>
+            <if test="fhr != null">fhr,</if>
+            <if test="kpr != null">kpr,</if>
+            <if test="tsnsrsbh != null">tsnsrsbh,</if>
+            <if test="bz != null">bz,</if>
+            <if test="bizNum != null">biz_num,</if>
+            <if test="spUser != null">sp_user,</if>
+            <if test="czyId != null">czy_id,</if>
+            <if test="phoneNo != null">phone_no,</if>
+            <if test="skm != null">skm,</if>
+            <if test="csmUnionid != null">csm_unionid,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="wspzhm != null">#{wspzhm,jdbcType=VARCHAR},</if>
+            <if test="fpJym != null">#{fpJym,jdbcType=VARCHAR},</if>
+            <if test="jqbh != null">#{jqbh,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null">#{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null">#{fphm,jdbcType=VARCHAR},</if>
+            <if test="kprq != null">#{kprq,jdbcType=DATE},</if>
+            <if test="hjje != null">#{hjje,jdbcType=DECIMAL},</if>
+            <if test="sl != null">#{sl,jdbcType=DECIMAL},</if>
+            <if test="hjse != null">#{hjse,jdbcType=DECIMAL},</if>
+            <if test="gfsh != null">#{gfsh,jdbcType=VARCHAR},</if>
+            <if test="gfmc != null">#{gfmc,jdbcType=VARCHAR},</if>
+            <if test="gfdzDh != null">#{gfdzDh,jdbcType=VARCHAR},</if>
+            <if test="gfyhmcYhzh != null">#{gfyhmcYhzh,jdbcType=VARCHAR},</if>
+            <if test="xfsh != null">#{xfsh,jdbcType=VARCHAR},</if>
+            <if test="xfmc != null">#{xfmc,jdbcType=VARCHAR},</if>
+            <if test="xfdzDh != null">#{xfdzDh,jdbcType=VARCHAR},</if>
+            <if test="xfyhmcYhzh != null">#{xfyhmcYhzh,jdbcType=VARCHAR},</if>
+            <if test="swjgdm != null">#{swjgdm,jdbcType=VARCHAR},</if>
+            <if test="swjgmc != null">#{swjgmc,jdbcType=VARCHAR},</if>
+            <if test="mw != null">#{mw,jdbcType=VARCHAR},</if>
+            <if test="zfBz != null">#{zfBz,jdbcType=INTEGER},</if>
+            <if test="skr != null">#{skr,jdbcType=VARCHAR},</if>
+            <if test="fhr != null">#{fhr,jdbcType=VARCHAR},</if>
+            <if test="kpr != null">#{kpr,jdbcType=VARCHAR},</if>
+            <if test="tsnsrsbh != null">#{tsnsrsbh,jdbcType=VARCHAR},</if>
+            <if test="bz != null">#{bz,jdbcType=VARCHAR},</if>
+            <if test="bizNum != null">#{bizNum,jdbcType=VARCHAR},</if>
+            <if test="spUser != null">#{spUser,jdbcType=VARCHAR},</if>
+            <if test="czyId != null">#{czyId,jdbcType=VARCHAR},</if>
+            <if test="phoneNo != null">#{phoneNo,jdbcType=VARCHAR},</if>
+            <if test="skm != null">#{skm,jdbcType=VARCHAR},</if>
+            <if test="csmUnionid != null">#{csmUnionid,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpInvoice">
+        update cd_efp_invoice
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="wspzhm != null and wspzhm != ''">wspzhm = #{wspzhm,jdbcType=VARCHAR},</if>
+            <if test="fpJym != null and fpJym != ''">fp_jym = #{fpJym,jdbcType=VARCHAR},</if>
+            <if test="jqbh != null and jqbh != ''">jqbh = #{jqbh,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null and fpdm != ''">fpdm = #{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null and fphm != ''">fphm = #{fphm,jdbcType=VARCHAR},</if>
+            <if test="kprq != null and kprq != ''">kprq = #{kprq,jdbcType=DATE},</if>
+            <if test="hjje != null and hjje != ''">hjje = #{hjje,jdbcType=DECIMAL},</if>
+            <if test="sl != null and sl != ''">sl = #{sl,jdbcType=DECIMAL},</if>
+            <if test="hjse != null and hjse != ''">hjse = #{hjse,jdbcType=DECIMAL},</if>
+            <if test="gfsh != null and gfsh != ''">gfsh = #{gfsh,jdbcType=VARCHAR},</if>
+            <if test="gfmc != null and gfmc != ''">gfmc = #{gfmc,jdbcType=VARCHAR},</if>
+            <if test="gfdzDh != null and gfdzDh != ''">gfdz_dh = #{gfdzDh,jdbcType=VARCHAR},</if>
+            <if test="gfyhmcYhzh != null and gfyhmcYhzh != ''">gfyhmc_yhzh = #{gfyhmcYhzh,jdbcType=VARCHAR},</if>
+            <if test="xfsh != null and xfsh != ''">xfsh = #{xfsh,jdbcType=VARCHAR},</if>
+            <if test="xfmc != null and xfmc != ''">xfmc = #{xfmc,jdbcType=VARCHAR},</if>
+            <if test="xfdzDh != null and xfdzDh != ''">xfdz_dh = #{xfdzDh,jdbcType=VARCHAR},</if>
+            <if test="xfyhmcYhzh != null and xfyhmcYhzh != ''">xfyhmc_yhzh = #{xfyhmcYhzh,jdbcType=VARCHAR},</if>
+            <if test="swjgdm != null and swjgdm != ''">swjgdm = #{swjgdm,jdbcType=VARCHAR},</if>
+            <if test="swjgmc != null and swjgmc != ''">swjgmc = #{swjgmc,jdbcType=VARCHAR},</if>
+            <if test="mw != null and mw != ''">mw = #{mw,jdbcType=VARCHAR},</if>
+            <if test="zfBz != null and zfBz != ''">zf_bz = #{zfBz,jdbcType=INTEGER},</if>
+            <if test="skr != null and skr != ''">skr = #{skr,jdbcType=VARCHAR},</if>
+            <if test="fhr != null and fhr != ''">fhr = #{fhr,jdbcType=VARCHAR},</if>
+            <if test="kpr != null and kpr != ''">kpr = #{kpr,jdbcType=VARCHAR},</if>
+            <if test="tsnsrsbh != null and tsnsrsbh != ''">tsnsrsbh = #{tsnsrsbh,jdbcType=VARCHAR},</if>
+            <if test="bz != null and bz != ''">bz = #{bz,jdbcType=VARCHAR},</if>
+            <if test="bizNum != null and bizNum != ''">biz_num = #{bizNum,jdbcType=VARCHAR},</if>
+            <if test="spUser != null and spUser != ''">sp_user = #{spUser,jdbcType=VARCHAR},</if>
+            <if test="czyId != null and czyId != ''">czy_id = #{czyId,jdbcType=VARCHAR},</if>
+            <if test="phoneNo != null and phoneNo != ''">phone_no = #{phoneNo,jdbcType=VARCHAR},</if>
+            <if test="skm != null and skm != ''">skm = #{skm,jdbcType=VARCHAR},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+        </set>
+
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectInvoicesByXfsh" resultMap="BaseResultMap">
+        select id, wspzhm, fp_jym, jqbh, fpdm, fphm, kprq, hjje, sl, hjse, gfsh, gfmc, gfdz_dh,
+    gfyhmc_yhzh, xfsh, xfmc, xfdz_dh, xfyhmc_yhzh, swjgdm, swjgmc, mw, zf_bz, skr, fhr,
+    kpr, tsnsrsbh, bz, biz_num, sp_user, czy_id, phone_no, skm, create_time
+    from cd_efp_invoice
+        where xfsh = #{xfsh}
+        order by create_time desc
+        limit #{pageOff},#{pageSize}
+    </select>
+
+    <select id="selectInvoicesByPhone" resultMap="BaseResultMap">
+        select id, wspzhm, fp_jym, jqbh, fpdm, fphm, kprq, hjje, sl, hjse, gfsh, gfmc, gfdz_dh,
+        gfyhmc_yhzh, xfsh, xfmc, xfdz_dh, xfyhmc_yhzh, swjgdm, swjgmc, mw, zf_bz, skr, fhr,
+        kpr, tsnsrsbh, bz, biz_num, sp_user, czy_id, phone_no, skm, create_time
+        from cd_efp_invoice
+        where phone_no = #{phone}
+        order by create_time desc
+        limit #{pageOff},#{pageSize}
+    </select>
+
+
+    <select id="selectSeleTest"  resultType="java.util.HashMap">
+        SELECT f.fpdm,f.fphm,f.nsrsbh,f.url,
+        CONCAT(c.update_time,'') as update_time,c.kp_json,
+      CONCAT(  hjje+hjse ,'') AS jshj FROM cd_efp_invoice_copy  c
+        INNER JOIN cd_efp_file_repository f ON c.fphm=f.fphm AND c.fpdm=f.fpdm
+        INNER JOIN cd_efp_invoice AS g ON g.fpdm=f.fpdm AND g.fphm=f.fphm
+        <![CDATA[
+           WHERE c.bz=3 AND c.update_time>='2018-06-08 12:57:00' AND c.update_time<='2018-06-08 18:09:06'
+      ]]>
+    </select>
+
+
+    <select id="selectbyhm" resultMap="BaseResultMap">
+      SELECT hjje+hjse AS jshj FROM cd_efp_invoice WHERE fpdm=#{fpdm} AND fphm=#{fphm}
+    </select>
+
+
+    <!--查询是否存在抬头维护表数据-->
+    <select id="selectRiseInfo" resultType="java.util.HashMap">
+        select id,xfsh,gfmc,gfsh
+        from cd_efp_risemaintain WHERE gfsh=#{gfsh}
+    </select>
+
+    <!--添加抬头维护表数据-->
+    <insert id="insertRise">
+        insert into cd_efp_risemaintain(id,xfsh,gfsh,gfdz_dh,gfyhmc_yhzh,email,gfmc,status,update_time,create_time)
+        VALUES(#{id},#{xfsh},#{gfsh},#{gfdzdh},#{gfyhmcyhzh},#{email},#{gfmc},#{status},#{updatetime},#{createtime})
+    </insert>
+
+
+    <!--查询pdf内容 数据-->
+    <select id="selectMxall" resultType="java.util.HashMap">
+   SELECT CONCAT(ROUND(q.dj,8),'') as dj,q.wp_dw as dw,q.wp_xh as ggxh,q.wp_mc as hwmc,CONCAT(ROUND(q.je,2),'') as je,CONCAT(ROUND(q.se,2),'') as se,
+   concat(ROUND(q.sl,0),'') as sl,q.slv FROM `cd_efp_invoice_qd` q WHERE q.fpdm=#{fpdm} AND q.fphm=#{fphm}
+    </select>
+    <!--没有生成pdf的数据-->
+    <select id="queryNodpfAll" resultType="java.util.HashMap">
+    SELECT
+	ROUND(c.hjje+c.hjse,2) AS jshjxx,
+	c.bz,c.fhr,c.fphm,c.fpdm,c.gfdz_dh AS gfdzdh,c.gfmc AS gfmc,c.gfsh AS gfsh,c.gfyhmc_yhzh AS gfyhzh,c.hjje AS je,c.hjse AS se,
+	c.jqbh,c.fp_jym AS jym,DATE_FORMAT(c.kprq,'%Y年%m月%d日') AS kprq,c.kpr,c.mw,c.parm1 AS qrm,
+	c.skr,c.xfsh,c.xfmc,c.xfdz_dh AS xfdzdh,c.xfyhmc_yhzh AS xfyhzh,o.parm2 FROM `cd_efp_invoice` c
+       LEFT JOIN cd_efp_invoice_copy o ON c.fphm=o.fphm AND c.fpdm=o.fpdm WHERE c.fphm=#{fphm} and c.fpdm=#{fpdm}
+    </select>
+    <!--第一个条件-->
+    <!-- SELECT fphm,fpdm,create_time FROM `cd_efp_mailmanage` WHERE parm2 LIKE '%pdfUrl=0%' AND state='-1'-->
+
+    <!--第二个条件-->
+    <!--parm2 is null AND state='1'-->
+
+
+    <!--<if test="id != null">id,</if>
+    <if test="xfsh != null">xfsh,</if>
+    <if test="gfsh != null">gfsh,</if>
+    <if test="gfmc != null">gfmc,</if>
+    <if test="gfdzdh != null">gfdzdh,</if>
+    <if test="gfyhmcyhzh != null">gfyhmcyhzh,</if>
+    <if test="email != null">email,</if>
+    <if test="status != null">status,</if>
+    <if test="updatetime != null">updatetime,</if>
+    <if test="createtime != null">createtime</if>-->
+    <!--<select id="selectInvoicesList" resultType="java.util.HashMap">-->
+        <!--select id,gfmc,fpdm,fphm,hjje-->
+        <!--from cd_efp_invoice-->
+        <!--where phone_no = #{phone}-->
+        <!--order by create_time desc-->
+        <!--limit #{pageOff},#{pageSize}-->
+    <!--</select>-->
+
+    <!--<select id="selectCount" resultType="java.lang.Integer">-->
+        <!--select COUNT(id)-->
+        <!--from cd_efp_invoice-->
+        <!--where phone_no = #{phone}-->
+    <!--</select>-->
+
+    <!--<select id="selectFpInfo" resultMap="BaseResultMap" parameterType="java.lang.String">-->
+        <!--select gfmc,hjje,create_time-->
+        <!--from cd_efp_invoice-->
+        <!--where fpdm = #{fpdm} AND fphm = #{fphm}-->
+    <!--</select>-->
+
+    <!--<select id="selectLikeInvoices" resultType="java.util.HashMap">-->
+        <!--select gfmc,fpdm,fphm,hjje-->
+        <!--from cd_efp_invoice-->
+        <!--where gfmc like concat(#{gfmc}, '%') OR fpdm like concat(#{gfmc}, '%') OR fphm like concat(#{gfmc}, '%')-->
+        <!--limit #{pageOff},#{pageSize}-->
+    <!--</select>-->
+
+    <!--<select id="selectCounts" resultType="java.lang.String">-->
+        <!--select COUNT(id) from cd_efp_invoice GROUP BY gfmc like concat(#{gfmc}, '%') OR fpdm like concat(#{gfmc}, '%') OR fphm like concat(#{gfmc}, '%')-->
+    <!--</select>-->
+
+
+
+</mapper>

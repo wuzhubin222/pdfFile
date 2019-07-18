@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpGrSpBmMapper">
+    <resultMap id="BaseResultMap" type="model.EfpGrSpBm">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="BM" property="bm" jdbcType="INTEGER"/>
+        <result column="MC" property="mc" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="order" property="order" jdbcType="VARCHAR"/>
+        <result column="qqlsh" property="qqlsh" jdbcType="VARCHAR"/>
+        <result column="JM" property="jm" jdbcType="VARCHAR"/>
+        <result column="SJBM" property="sjbm" jdbcType="VARCHAR"/>
+        <result column="KJM" property="kjm" jdbcType="VARCHAR"/>
+        <result column="SLV" property="slv" jdbcType="REAL"/>
+        <result column="SPSM" property="spsm" jdbcType="VARCHAR"/>
+        <result column="GGXH" property="ggxh" jdbcType="VARCHAR"/>
+        <result column="JLDW" property="jldw" jdbcType="VARCHAR"/>
+        <result column="DJ" property="dj" jdbcType="REAL"/>
+        <result column="HSJBZ" property="hsjbz" jdbcType="BIT"/>
+        <result column="XSSRKM" property="xssrkm" jdbcType="VARCHAR"/>
+        <result column="YJZZSKM" property="yjzzskm" jdbcType="VARCHAR"/>
+        <result column="XSTHKM" property="xsthkm" jdbcType="VARCHAR"/>
+        <result column="HYSY" property="hysy" jdbcType="BIT"/>
+        <result column="SPZL" property="spzl" jdbcType="VARCHAR"/>
+        <result column="SPSX" property="spsx" jdbcType="VARCHAR"/>
+        <result column="WJ" property="wj" jdbcType="INTEGER"/>
+        <result column="XTHASH" property="xthash" jdbcType="VARCHAR"/>
+        <result column="ISHIDE" property="ishide" jdbcType="VARCHAR"/>
+        <result column="XTCODE" property="xtcode" jdbcType="VARCHAR"/>
+        <result column="SPFL" property="spfl" jdbcType="VARCHAR"/>
+        <result column="YHZC" property="yhzc" jdbcType="VARCHAR"/>
+        <result column="SPFLMC" property="spflmc" jdbcType="VARCHAR"/>
+        <result column="YHZCMC" property="yhzcmc" jdbcType="VARCHAR"/>
+        <result column="LSLVBS" property="lslvbs" jdbcType="VARCHAR"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+        <result column="parm3" property="parm3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_grspbm
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select ID, BM, MC, nsrsbh,`order`,qqlsh, JM, SJBM, KJM, SLV, SPSM, GGXH, JLDW, DJ,
+    HSJBZ, XSSRKM, YJZZSKM, XSTHKM, HYSY, SPZL, SPSX, WJ, XTHASH, ISHIDE, XTCODE, SPFL, 
+    YHZC, SPFLMC, YHZCMC, LSLVBS, parm1, parm2, parm3
+    from cd_efp_grspbm
+  </select>
+
+    <select id="selectMcByNsrsbh" resultType="java.util.HashMap">
+        select MC from cd_efp_grspbm where nsrsbh = #{nsrsbh}
+    </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpGrSpBm">
+        select ID, BM, MC, nsrsbh, `order`, qqlsh, JM, SJBM, KJM, SLV, SPSM, GGXH, JLDW, DJ,
+        HSJBZ, XSSRKM, YJZZSKM, XSTHKM, HYSY, SPZL, SPSX, WJ, XTHASH, ISHIDE, XTCODE, SPFL,
+        YHZC, SPFLMC, YHZCMC, LSLVBS, parm1, parm2, parm3
+        from cd_efp_grspbm
+
+        <where>
+            <if test="id != null">ID = #{id,jdbcType=VARCHAR}</if>
+            <if test="bm != null">and BM = #{bm,jdbcType=INTEGER}</if>
+            <if test="mc != null">and MC = #{mc,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="order != null">and order = #{order,jdbcType=VARCHAR}</if>
+            <if test="qqlsh != null">and qqlsh = #{qqlsh,jdbcType=VARCHAR}</if>
+            <if test="jm != null">and JM = #{jm,jdbcType=VARCHAR}</if>
+            <if test="sjbm != null">and SJBM = #{sjbm,jdbcType=VARCHAR}</if>
+            <if test="kjm != null">and KJM = #{kjm,jdbcType=VARCHAR}</if>
+            <if test="slv != null">and SLV = #{slv,jdbcType=REAL}</if>
+            <if test="spsm != null">and SPSM = #{spsm,jdbcType=VARCHAR}</if>
+            <if test="ggxh != null">and GGXH = #{ggxh,jdbcType=VARCHAR}</if>
+            <if test="jldw != null">and JLDW = #{jldw,jdbcType=VARCHAR}</if>
+            <if test="dj != null">and DJ = #{dj,jdbcType=REAL}</if>
+            <if test="hsjbz != null">and HSJBZ = #{hsjbz,jdbcType=BIT}</if>
+            <if test="xssrkm != null">and XSSRKM = #{xssrkm,jdbcType=VARCHAR}</if>
+            <if test="yjzzskm != null">and YJZZSKM = #{yjzzskm,jdbcType=VARCHAR}</if>
+            <if test="xsthkm != null">and XSTHKM = #{xsthkm,jdbcType=VARCHAR}</if>
+            <if test="hysy != null">and HYSY = #{hysy,jdbcType=BIT}</if>
+            <if test="spzl != null">and SPZL = #{spzl,jdbcType=VARCHAR}</if>
+            <if test="spsx != null">and SPSX = #{spsx,jdbcType=VARCHAR}</if>
+            <if test="wj != null">and WJ = #{wj,jdbcType=INTEGER}</if>
+            <if test="xthash != null">and XTHASH = #{xthash,jdbcType=VARCHAR}</if>
+            <if test="ishide != null">and ISHIDE = #{ishide,jdbcType=VARCHAR}</if>
+            <if test="xtcode != null">and XTCODE = #{xtcode,jdbcType=VARCHAR}</if>
+            <if test="spfl != null">and SPFL = #{spfl,jdbcType=VARCHAR}</if>
+            <if test="yhzc != null">and YHZC = #{yhzc,jdbcType=VARCHAR}</if>
+            <if test="spflmc != null">and SPFLMC = #{spflmc,jdbcType=VARCHAR}</if>
+            <if test="yhzcmc != null">and YHZCMC = #{yhzcmc,jdbcType=VARCHAR}</if>
+            <if test="lslvbs != null">and LSLVBS = #{lslvbs,jdbcType=VARCHAR}</if>
+            <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+            <if test="parm3 != null">and parm3 = #{parm3,jdbcType=VARCHAR}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpGrSpBm" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_grspbm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">ID,</if>
+            <if test="bm != null">BM,</if>
+            <if test="mc != null">MC,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="order != null">order,</if>
+            <if test="qqlsh != null">qqlsh,</if>
+            <if test="jm != null">JM,</if>
+            <if test="sjbm != null">SJBM,</if>
+            <if test="kjm != null">KJM,</if>
+            <if test="slv != null">SLV,</if>
+            <if test="spsm != null">SPSM,</if>
+            <if test="ggxh != null">GGXH,</if>
+            <if test="jldw != null">JLDW,</if>
+            <if test="dj != null">DJ,</if>
+            <if test="hsjbz != null">HSJBZ,</if>
+            <if test="xssrkm != null">XSSRKM,</if>
+            <if test="yjzzskm != null">YJZZSKM,</if>
+            <if test="xsthkm != null">XSTHKM,</if>
+            <if test="hysy != null">HYSY,</if>
+            <if test="spzl != null">SPZL,</if>
+            <if test="spsx != null">SPSX,</if>
+            <if test="wj != null">WJ,</if>
+            <if test="xthash != null">XTHASH,</if>
+            <if test="ishide != null">ISHIDE,</if>
+            <if test="xtcode != null">XTCODE,</if>
+            <if test="spfl != null">SPFL,</if>
+            <if test="yhzc != null">YHZC,</if>
+            <if test="spflmc != null">SPFLMC,</if>
+            <if test="yhzcmc != null">YHZCMC,</if>
+            <if test="lslvbs != null">LSLVBS,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+            <if test="parm3 != null">parm3,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="bm != null">#{bm,jdbcType=INTEGER},</if>
+            <if test="mc != null">#{mc,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="order != null">#{order,jdbcType=VARCHAR},</if>
+            <if test="qqlsh != null">#{qqlsh,jdbcType=VARCHAR},</if>
+            <if test="jm != null">#{jm,jdbcType=VARCHAR},</if>
+            <if test="sjbm != null">#{sjbm,jdbcType=VARCHAR},</if>
+            <if test="kjm != null">#{kjm,jdbcType=VARCHAR},</if>
+            <if test="slv != null">#{slv,jdbcType=REAL},</if>
+            <if test="spsm != null">#{spsm,jdbcType=VARCHAR},</if>
+            <if test="ggxh != null">#{ggxh,jdbcType=VARCHAR},</if>
+            <if test="jldw != null">#{jldw,jdbcType=VARCHAR},</if>
+            <if test="dj != null">#{dj,jdbcType=REAL},</if>
+            <if test="hsjbz != null">#{hsjbz,jdbcType=BIT},</if>
+            <if test="xssrkm != null">#{xssrkm,jdbcType=VARCHAR},</if>
+            <if test="yjzzskm != null">#{yjzzskm,jdbcType=VARCHAR},</if>
+            <if test="xsthkm != null">#{xsthkm,jdbcType=VARCHAR},</if>
+            <if test="hysy != null">#{hysy,jdbcType=BIT},</if>
+            <if test="spzl != null">#{spzl,jdbcType=VARCHAR},</if>
+            <if test="spsx != null">#{spsx,jdbcType=VARCHAR},</if>
+            <if test="wj != null">#{wj,jdbcType=INTEGER},</if>
+            <if test="xthash != null">#{xthash,jdbcType=VARCHAR},</if>
+            <if test="ishide != null">#{ishide,jdbcType=VARCHAR},</if>
+            <if test="xtcode != null">#{xtcode,jdbcType=VARCHAR},</if>
+            <if test="spfl != null">#{spfl,jdbcType=VARCHAR},</if>
+            <if test="yhzc != null">#{yhzc,jdbcType=VARCHAR},</if>
+            <if test="spflmc != null">#{spflmc,jdbcType=VARCHAR},</if>
+            <if test="yhzcmc != null">#{yhzcmc,jdbcType=VARCHAR},</if>
+            <if test="lslvbs != null">#{lslvbs,jdbcType=VARCHAR},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null">#{parm3,jdbcType=VARCHAR},</if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpGrSpBm">
+        update cd_efp_grspbm
+        <set>
+            <if test="id != null and id != ''">ID = #{id,jdbcType=VARCHAR},</if>
+            <if test="bm != null and bm != ''">BM = #{bm,jdbcType=INTEGER},</if>
+            <if test="mc != null and mc != ''">MC = #{mc,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="order != null and order != ''">order = #{order,jdbcType=VARCHAR},</if>
+            <if test="qqlsh != null and qqlsh != ''">qqlsh = #{qqlsh,jdbcType=VARCHAR},</if>
+            <if test="jm != null and jm != ''">JM = #{jm,jdbcType=VARCHAR},</if>
+            <if test="sjbm != null and sjbm != ''">SJBM = #{sjbm,jdbcType=VARCHAR},</if>
+            <if test="kjm != null and kjm != ''">KJM = #{kjm,jdbcType=VARCHAR},</if>
+            <if test="slv != null and slv != ''">SLV = #{slv,jdbcType=REAL},</if>
+            <if test="spsm != null and spsm != ''">SPSM = #{spsm,jdbcType=VARCHAR},</if>
+            <if test="ggxh != null and ggxh != ''">GGXH = #{ggxh,jdbcType=VARCHAR},</if>
+            <if test="jldw != null and jldw != ''">JLDW = #{jldw,jdbcType=VARCHAR},</if>
+            <if test="dj != null and dj != ''">DJ = #{dj,jdbcType=REAL},</if>
+            <if test="hsjbz != null and hsjbz != ''">HSJBZ = #{hsjbz,jdbcType=BIT},</if>
+            <if test="xssrkm != null and xssrkm != ''">XSSRKM = #{xssrkm,jdbcType=VARCHAR},</if>
+            <if test="yjzzskm != null and yjzzskm != ''">YJZZSKM = #{yjzzskm,jdbcType=VARCHAR},</if>
+            <if test="xsthkm != null and xsthkm != ''">XSTHKM = #{xsthkm,jdbcType=VARCHAR},</if>
+            <if test="hysy != null and hysy != ''">HYSY = #{hysy,jdbcType=BIT},</if>
+            <if test="spzl != null and spzl != ''">SPZL = #{spzl,jdbcType=VARCHAR},</if>
+            <if test="spsx != null and spsx != ''">SPSX = #{spsx,jdbcType=VARCHAR},</if>
+            <if test="wj != null and wj != ''">WJ = #{wj,jdbcType=INTEGER},</if>
+            <if test="xthash != null and xthash != ''">XTHASH = #{xthash,jdbcType=VARCHAR},</if>
+            <if test="ishide != null and ishide != ''">ISHIDE = #{ishide,jdbcType=VARCHAR},</if>
+            <if test="xtcode != null and xtcode != ''">XTCODE = #{xtcode,jdbcType=VARCHAR},</if>
+            <if test="spfl != null and spfl != ''">SPFL = #{spfl,jdbcType=VARCHAR},</if>
+            <if test="yhzc != null and yhzc != ''">YHZC = #{yhzc,jdbcType=VARCHAR},</if>
+            <if test="spflmc != null and spflmc != ''">SPFLMC = #{spflmc,jdbcType=VARCHAR},</if>
+            <if test="yhzcmc != null and yhzcmc != ''">YHZCMC = #{yhzcmc,jdbcType=VARCHAR},</if>
+            <if test="lslvbs != null and lslvbs != ''">LSLVBS = #{lslvbs,jdbcType=VARCHAR},</if>
+            <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null and parm3 != ''">parm3 = #{parm3,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

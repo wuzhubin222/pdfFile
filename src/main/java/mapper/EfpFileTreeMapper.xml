@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpFileTreeMapper">
+    <resultMap id="BaseResultMap" type="model.EfpFileTree">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="city_no" property="cityNo" jdbcType="VARCHAR"/>
+        <result column="reg_month" property="regMonth" jdbcType="VARCHAR"/>
+        <result column="reg_day" property="regDay" jdbcType="VARCHAR"/>
+        <result column="kp_month" property="kpMonth" jdbcType="VARCHAR"/>
+        <result column="kp_day" property="kpDay" jdbcType="VARCHAR"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="file_number" property="fileNumber" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_filetree
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, nsrsbh, city_no, reg_month, reg_day, kp_month, kp_day, file_name, file_number, 
+    create_time
+    from cd_efp_filetree
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpFileTree">
+        select id, nsrsbh, city_no, reg_month, reg_day, kp_month, kp_day, file_name, file_number,
+        create_time
+        from cd_efp_filetree
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="cityNo != null">and city_no = #{cityNo,jdbcType=VARCHAR}</if>
+            <if test="regMonth != null">and reg_month = #{regMonth,jdbcType=VARCHAR}</if>
+            <if test="regDay != null">and reg_day = #{regDay,jdbcType=VARCHAR}</if>
+            <if test="kpMonth != null">and kp_month = #{kpMonth,jdbcType=VARCHAR}</if>
+            <if test="kpDay != null">and kp_day = #{kpDay,jdbcType=VARCHAR}</if>
+            <if test="fileName != null">and file_name = #{fileName,jdbcType=VARCHAR}</if>
+            <if test="fileNumber != null">and file_number = #{fileNumber,jdbcType=INTEGER}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpFileTree" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_filetree
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="cityNo != null">city_no,</if>
+            <if test="regMonth != null">reg_month,</if>
+            <if test="regDay != null">reg_day,</if>
+            <if test="kpMonth != null">kp_month,</if>
+            <if test="kpDay != null">kp_day,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="fileNumber != null">file_number,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="cityNo != null">#{cityNo,jdbcType=VARCHAR},</if>
+            <if test="regMonth != null">#{regMonth,jdbcType=VARCHAR},</if>
+            <if test="regDay != null">#{regDay,jdbcType=VARCHAR},</if>
+            <if test="kpMonth != null">#{kpMonth,jdbcType=VARCHAR},</if>
+            <if test="kpDay != null">#{kpDay,jdbcType=VARCHAR},</if>
+            <if test="fileName != null">#{fileName,jdbcType=VARCHAR},</if>
+            <if test="fileNumber != null">#{fileNumber,jdbcType=INTEGER},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpFileTree">
+        update cd_efp_filetree
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="cityNo != null and cityNo != ''">city_no = #{cityNo,jdbcType=VARCHAR},</if>
+            <if test="regMonth != null and regMonth != ''">reg_month = #{regMonth,jdbcType=VARCHAR},</if>
+            <if test="regDay != null and regDay != ''">reg_day = #{regDay,jdbcType=VARCHAR},</if>
+            <if test="kpMonth != null and kpMonth != ''">kp_month = #{kpMonth,jdbcType=VARCHAR},</if>
+            <if test="kpDay != null and kpDay != ''">kp_day = #{kpDay,jdbcType=VARCHAR},</if>
+            <if test="fileName != null and fileName != ''">file_name = #{fileName,jdbcType=VARCHAR},</if>
+            <if test="fileNumber != null and fileNumber != ''">file_number = #{fileNumber,jdbcType=INTEGER},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="QueryByFileName" resultType="java.util.HashMap">
+    select * from cd_efp_filetree where file_name like concat('%', #{fileName}, '%')
+  </select>
+
+</mapper>

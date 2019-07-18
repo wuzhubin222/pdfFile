@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.CertUploadDataMapper">
+    <resultMap id="BaseResultMap" type="model.CertUploadData">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="etp_tax_id" property="etpTaxId" jdbcType="VARCHAR"/>
+        <result column="applyId" property="applyid" jdbcType="VARCHAR"/>
+        <result column="yyzz_url" property="yyzzUrl" jdbcType="VARCHAR"/>
+        <result column="sfz_url" property="sfzUrl" jdbcType="VARCHAR"/>
+        <result column="sqb_url" property="sqbUrl" jdbcType="VARCHAR"/>
+        <result column="sqxy_url" property="sqxyUrl" jdbcType="VARCHAR"/>
+        <result column="err_code" property="errCode" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="seal_code" property="sealCode" jdbcType="VARCHAR"/>
+        <result column="invoice_seal_url" property="invoiceSealUrl" jdbcType="VARCHAR"/>
+        <result column="finance_seal_url" property="financeSealUrl" jdbcType="VARCHAR"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, create_time, modify_time, etp_tax_id, applyId, yyzz_url, sfz_url, sqb_url, 
+    sqxy_url, err_code, err_msg
+    from cert_upload_data
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.CertUploadData">
+        select *
+        from cert_upload_data
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="modifyTime != null">and modify_time = #{modifyTime,jdbcType=TIMESTAMP}</if>
+            <if test="etpTaxId != null">and etp_tax_id = #{etpTaxId,jdbcType=VARCHAR}</if>
+            <if test="applyid != null">and applyId = #{applyid,jdbcType=VARCHAR}</if>
+            <if test="yyzzUrl != null">and yyzz_url = #{yyzzUrl,jdbcType=VARCHAR}</if>
+            <if test="sfzUrl != null">and sfz_url = #{sfzUrl,jdbcType=VARCHAR}</if>
+            <if test="sqbUrl != null">and sqb_url = #{sqbUrl,jdbcType=VARCHAR}</if>
+            <if test="sqxyUrl != null">and sqxy_url = #{sqxyUrl,jdbcType=VARCHAR}</if>
+            <if test="errCode != null">and err_code = #{errCode,jdbcType=VARCHAR}</if>
+            <if test="errMsg != null">and err_msg = #{errMsg,jdbcType=VARCHAR}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.CertUploadData" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cert_upload_data
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="modifyTime != null">modify_time,</if>
+            <if test="etpTaxId != null">etp_tax_id,</if>
+            <if test="applyid != null">applyId,</if>
+            <if test="yyzzUrl != null">yyzz_url,</if>
+            <if test="sfzUrl != null">sfz_url,</if>
+            <if test="sqbUrl != null">sqb_url,</if>
+            <if test="sqxyUrl != null">sqxy_url,</if>
+            <if test="errCode != null">err_code,</if>
+            <if test="errMsg != null">err_msg,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">#{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="etpTaxId != null">#{etpTaxId,jdbcType=VARCHAR},</if>
+            <if test="applyid != null">#{applyid,jdbcType=VARCHAR},</if>
+            <if test="yyzzUrl != null">#{yyzzUrl,jdbcType=VARCHAR},</if>
+            <if test="sfzUrl != null">#{sfzUrl,jdbcType=VARCHAR},</if>
+            <if test="sqbUrl != null">#{sqbUrl,jdbcType=VARCHAR},</if>
+            <if test="sqxyUrl != null">#{sqxyUrl,jdbcType=VARCHAR},</if>
+            <if test="errCode != null">#{errCode,jdbcType=VARCHAR},</if>
+            <if test="errMsg != null">#{errMsg,jdbcType=VARCHAR},</if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.CertUploadData">
+        update cert_upload_data
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="etpTaxId != null and etpTaxId != ''">etp_tax_id = #{etpTaxId,jdbcType=VARCHAR},</if>
+            <if test="applyid != null and applyid != ''">applyId = #{applyid,jdbcType=VARCHAR},</if>
+            <if test="yyzzUrl != null and yyzzUrl != ''">yyzz_url = #{yyzzUrl,jdbcType=VARCHAR},</if>
+            <if test="sfzUrl != null and sfzUrl != ''">sfz_url = #{sfzUrl,jdbcType=VARCHAR},</if>
+            <if test="sqbUrl != null and sqbUrl != ''">sqb_url = #{sqbUrl,jdbcType=VARCHAR},</if>
+            <if test="sqxyUrl != null and sqxyUrl != ''">sqxy_url = #{sqxyUrl,jdbcType=VARCHAR},</if>
+            <if test="errCode != null and errCode != ''">err_code = #{errCode,jdbcType=VARCHAR},</if>
+            <if test="errMsg != null and errMsg != ''">err_msg = #{errMsg,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="updateByNsrsbh" parameterType="model.CertUploadData">
+        update cert_upload_data
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="modifyTime != null">modify_time = #{modifyTime,jdbcType=TIMESTAMP},</if>
+            <if test="etpTaxId != null and etpTaxId != ''">etp_tax_id = #{etpTaxId,jdbcType=VARCHAR},</if>
+            <if test="applyid != null and applyid != ''">applyId = #{applyid,jdbcType=VARCHAR},</if>
+            <if test="yyzzUrl != null and yyzzUrl != ''">yyzz_url = #{yyzzUrl,jdbcType=VARCHAR},</if>
+            <if test="sfzUrl != null and sfzUrl != ''">sfz_url = #{sfzUrl,jdbcType=VARCHAR},</if>
+            <if test="sqbUrl != null and sqbUrl != ''">sqb_url = #{sqbUrl,jdbcType=VARCHAR},</if>
+            <if test="sqxyUrl != null and sqxyUrl != ''">sqxy_url = #{sqxyUrl,jdbcType=VARCHAR},</if>
+            <if test="errCode != null and errCode != ''">err_code = #{errCode,jdbcType=VARCHAR},</if>
+            <if test="errMsg != null and errMsg != ''">err_msg = #{errMsg,jdbcType=VARCHAR},</if>
+            <if test="invoiceSealUrl != null and invoiceSealUrl != ''">invoice_seal_url = #{invoiceSealUrl,jdbcType=VARCHAR},</if>
+            <if test="financeSealUrl != null and financeSealUrl != ''">finance_seal_url = #{financeSealUrl,jdbcType=VARCHAR},</if>
+        </set>
+        where etp_tax_id = #{etpTaxId,jdbcType=VARCHAR}
+    </update>
+</mapper>

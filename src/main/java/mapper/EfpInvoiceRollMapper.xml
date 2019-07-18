@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpInvoiceRollMapper" >
+  <resultMap id="BaseResultMap" type="model.EfpInvoiceRoll" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="fpdm" property="fpdm" jdbcType="VARCHAR" />
+    <result column="fp_st" property="fpSt" jdbcType="INTEGER" />
+    <result column="fp_ed" property="fpEd" jdbcType="INTEGER" />
+    <result column="fp_in" property="fpIn" jdbcType="INTEGER" />
+    <result column="ph" property="ph" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR" />
+    <result column="remain_num" property="remainNum" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="parm1" property="parm1" jdbcType="VARCHAR" />
+    <result column="parm2" property="parm2" jdbcType="VARCHAR" />
+    <result column="parm3" property="parm3" jdbcType="VARCHAR" />
+    <result column="parm4" property="parm4" jdbcType="VARCHAR" />
+    <result column="parm5" property="parm5" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cd_efp_invoice_roll
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, fpdm, fp_st, fp_ed, fp_in, ph, type, status, nsrsbh, remain_num, addtime, 
+    updatetime, parm1, parm2, parm3, parm4, parm5
+    from cd_efp_invoice_roll
+  </select>
+
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpInvoiceRoll">
+    select id, fpdm, fp_st, fp_ed, fp_in, ph, type, status, nsrsbh, remain_num, addtime,
+    updatetime, parm1, parm2, parm3, parm4, parm5
+    from cd_efp_invoice_roll
+
+    <where>
+      <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+      <if test="fpdm != null">and fpdm = #{fpdm,jdbcType=VARCHAR}</if>
+      <if test="fpSt != null">and fp_st = #{fpSt,jdbcType=INTEGER}</if>
+      <if test="fpEd != null">and fp_ed = #{fpEd,jdbcType=INTEGER}</if>
+      <if test="fpIn != null">and fp_in = #{fpIn,jdbcType=INTEGER}</if>
+      <if test="ph != null">and ph = #{ph,jdbcType=INTEGER}</if>
+      <if test="type != null">and type = #{type,jdbcType=VARCHAR}</if>
+      <if test="status != null">and status = #{status,jdbcType=INTEGER}</if>
+      <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+      <if test="remainNum != null">and remain_num = #{remainNum,jdbcType=INTEGER}</if>
+      <if test="addtime != null">and addtime = #{addtime,jdbcType=TIMESTAMP}</if>
+      <if test="updatetime != null">and updatetime = #{updatetime,jdbcType=TIMESTAMP}</if>
+      <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+      <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+      <if test="parm3 != null">and parm3 = #{parm3,jdbcType=VARCHAR}</if>
+      <if test="parm4 != null">and parm4 = #{parm4,jdbcType=VARCHAR}</if>
+      <if test="parm5 != null">and parm5 = #{parm5,jdbcType=VARCHAR}</if>
+    </where>
+
+  </select>
+
+  <insert id="insertSelective" parameterType="model.EfpInvoiceRoll" useGeneratedKeys="true">
+
+    <selectKey keyProperty="id" order="BEFORE" resultType="String">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
+
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="fpdm != null">fpdm,</if>
+      <if test="fpSt != null">fp_st,</if>
+      <if test="fpEd != null">fp_ed,</if>
+      <if test="fpIn != null">fp_in,</if>
+      <if test="ph != null">ph,</if>
+      <if test="type != null">type,</if>
+      <if test="status != null">status,</if>
+      <if test="nsrsbh != null">nsrsbh,</if>
+      <if test="remainNum != null">remain_num,</if>
+      <if test="addtime != null">addtime,</if>
+      <if test="updatetime != null">updatetime,</if>
+      <if test="parm1 != null">parm1,</if>
+      <if test="parm2 != null">parm2,</if>
+      <if test="parm3 != null">parm3,</if>
+      <if test="parm4 != null">parm4,</if>
+      <if test="parm5 != null">parm5,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="fpdm != null">#{fpdm,jdbcType=VARCHAR},</if>
+      <if test="fpSt != null">#{fpSt,jdbcType=INTEGER},</if>
+      <if test="fpEd != null">#{fpEd,jdbcType=INTEGER},</if>
+      <if test="fpIn != null">#{fpIn,jdbcType=INTEGER},</if>
+      <if test="ph != null">#{ph,jdbcType=INTEGER},</if>
+      <if test="type != null">#{type,jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+      <if test="remainNum != null">#{remainNum,jdbcType=INTEGER},</if>
+      <if test="addtime != null">#{addtime,jdbcType=TIMESTAMP},</if>
+      <if test="updatetime != null">#{updatetime,jdbcType=TIMESTAMP},</if>
+      <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+      <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+      <if test="parm3 != null">#{parm3,jdbcType=VARCHAR},</if>
+      <if test="parm4 != null">#{parm4,jdbcType=VARCHAR},</if>
+      <if test="parm5 != null">#{parm5,jdbcType=VARCHAR},</if>
+    </trim>
+    insert into cd_efp_invoice_roll
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="model.EfpInvoiceRoll">
+    update cd_efp_invoice_roll
+    <set>
+      <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+      <if test="fpdm != null and fpdm != ''">fpdm = #{fpdm,jdbcType=VARCHAR},</if>
+      <if test="fpSt != null and fpSt != ''">fp_st = #{fpSt,jdbcType=INTEGER},</if>
+      <if test="fpEd != null and fpEd != ''">fp_ed = #{fpEd,jdbcType=INTEGER},</if>
+      <if test="fpIn != null and fpIn != ''">fp_in = #{fpIn,jdbcType=INTEGER},</if>
+      <if test="ph != null and ph != ''">ph = #{ph,jdbcType=INTEGER},</if>
+      <if test="type != null and type != ''">type = #{type,jdbcType=VARCHAR},</if>
+      <if test="status != null and status != ''">status = #{status,jdbcType=INTEGER},</if>
+      <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+      <if test="remainNum != null and remainNum != ''">remain_num = #{remainNum,jdbcType=INTEGER},</if>
+      <if test="addtime != null and addtime != ''">addtime = #{addtime,jdbcType=TIMESTAMP},</if>
+      <if test="updatetime != null and updatetime != ''">updatetime = #{updatetime,jdbcType=TIMESTAMP},</if>
+      <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+      <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+      <if test="parm3 != null and parm3 != ''">parm3 = #{parm3,jdbcType=VARCHAR},</if>
+      <if test="parm4 != null and parm4 != ''">parm4 = #{parm4,jdbcType=VARCHAR},</if>
+      <if test="parm5 != null and parm5 != ''">parm5 = #{parm5,jdbcType=VARCHAR},</if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="select1" resultMap="BaseResultMap">
+    select id, fpdm, fp_st, fp_ed, fp_in, ph, type, status, nsrsbh, remain_num, addtime,
+    updatetime, parm1, parm2, parm3, parm4, parm5
+    from cd_efp_invoice_roll where nsrsbh = #{nsrsbh} and type = 'ptfp' ORDER BY addtime limit 1
+  </select>
+
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.EfpCaMapper">
+    <resultMap id="BaseResultMap" type="model.EfpCa">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="nsrsbh" jdbcType="VARCHAR" property="nsrsbh"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="ca_path" jdbcType="VARCHAR" property="caPath"/>
+        <result column="ca_img_path" jdbcType="VARCHAR" property="caImgPath"/>
+        <result column="ca_password" jdbcType="VARCHAR" property="caPassword"/>
+        <result column="template_name" jdbcType="VARCHAR" property="templateName"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_ca
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, create_time, nsrsbh, update_time, ca_path, ca_img_path, ca_password, template_name
+    from cd_efp_ca
+    </select>
+
+    <sql id="selAll">
+    select id, create_time, nsrsbh, update_time, ca_path, ca_img_path, ca_password, template_name
+    from cd_efp_ca
+    </sql>
+
+    <select id="selectSelective" parameterType="model.EfpCa" resultMap="BaseResultMap">
+        <include refid="selAll"/>
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="updateTime != null">and update_time = #{updateTime,jdbcType=DATE}</if>
+            <if test="caPath != null">and ca_path = #{caPath,jdbcType=VARCHAR}</if>
+            <if test="caImgPath != null">and ca_img_path = #{caImgPath,jdbcType=VARCHAR}</if>
+            <if test="templateName != null">and template_name = #{templateName,jdbcType=VARCHAR}</if>
+            <if test="caPassword != null">and ca_password = #{caPassword,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpCa" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_ca
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="caPath != null">ca_path,</if>
+            <if test="caImgPath != null">ca_img_path,</if>
+            <if test="caPassword != null">ca_password,</if>
+            <if test="templateName != null">template_name,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="updateTime != null">#{updateTime,jdbcType=DATE},</if>
+            <if test="caPath != null">#{caPath,jdbcType=VARCHAR},</if>
+            <if test="caImgPath != null">#{caImgPath,jdbcType=VARCHAR},</if>
+            <if test="caPassword != null">#{caPassword,jdbcType=VARCHAR},</if>
+            <if test="templateName != null">#{templateName,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpCa">
+        update cd_efp_ca
+        <set>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="updateTime != null">update_time = #{updateTime,jdbcType=DATE},</if>
+            <if test="caPath != null">ca_path = #{caPath,jdbcType=VARCHAR},</if>
+            <if test="caImgPath != null">ca_img_path = #{caImgPath,jdbcType=VARCHAR},</if>
+            <if test="templateName != null">template_name = #{templateName,jdbcType=VARCHAR},</if>
+            <if test="caPassword != null">ca_password = #{caPassword,jdbcType=VARCHAR}</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByNsrsbh" parameterType="model.EfpCa">
+        update cd_efp_ca
+        <set>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="updateTime != null">update_time = #{updateTime,jdbcType=DATE},</if>
+            <if test="caPath != null">ca_path = #{caPath,jdbcType=VARCHAR},</if>
+            <if test="caImgPath != null">ca_img_path = #{caImgPath,jdbcType=VARCHAR},</if>
+            <if test="templateName != null">template_name = #{templateName,jdbcType=VARCHAR},</if>
+            <if test="caPassword != null">ca_password = #{caPassword,jdbcType=VARCHAR}</if>
+        </set>
+        where nsrsbh = #{nsrsbh,jdbcType=VARCHAR}
+    </update>
+</mapper>

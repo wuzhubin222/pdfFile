@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpKpTopMapper">
+    <resultMap id="BaseResultMap" type="model.EfpKpTop">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="nsrmc" property="nsrmc" jdbcType="VARCHAR"/>
+        <result column="khyhmc_zh" property="khyhmcZh" jdbcType="VARCHAR"/>
+        <result column="dz_dh" property="dzDh" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+        <result column="parm3" property="parm3" jdbcType="VARCHAR"/>
+        <result column="parm4" property="parm4" jdbcType="VARCHAR"/>
+        <result column="parm5" property="parm5" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="bz" property="bz" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_kptop
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, nsrsbh, nsrmc, khyhmc_zh, dz_dh, status, parm1, parm2, parm3, parm4, parm5, 
+    phone, create_time, bz
+    from cd_efp_kptop
+  </select>
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpKpTop">
+        select id, nsrsbh, nsrmc, khyhmc_zh, dz_dh, status, parm1, parm2, parm3, parm4, parm5,
+        phone, create_time, bz
+        from cd_efp_kptop
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="nsrmc != null">nsrmc = #{nsrmc,jdbcType=VARCHAR}</if>
+            <if test="khyhmcZh != null">khyhmc_zh = #{khyhmcZh,jdbcType=VARCHAR}</if>
+            <if test="dzDh != null">dz_dh = #{dzDh,jdbcType=VARCHAR}</if>
+            <if test="status != null">status = #{status,jdbcType=INTEGER}</if>
+            <if test="parm1 != null">parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">parm2 = #{parm2,jdbcType=VARCHAR}</if>
+            <if test="parm3 != null">parm3 = #{parm3,jdbcType=VARCHAR}</if>
+            <if test="parm4 != null">parm4 = #{parm4,jdbcType=VARCHAR}</if>
+            <if test="parm5 != null">parm5 = #{parm5,jdbcType=VARCHAR}</if>
+            <if test="phone != null">phone = #{phone,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="bz != null">bz = #{bz,jdbcType=LONGVARCHAR}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpKpTop" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_kptop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="nsrmc != null">nsrmc,</if>
+            <if test="khyhmcZh != null">khyhmc_zh,</if>
+            <if test="dzDh != null">dz_dh,</if>
+            <if test="status != null">status,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+            <if test="parm3 != null">parm3,</if>
+            <if test="parm4 != null">parm4,</if>
+            <if test="parm5 != null">parm5,</if>
+            <if test="phone != null">phone,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="bz != null">bz,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null">#{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="khyhmcZh != null">#{khyhmcZh,jdbcType=VARCHAR},</if>
+            <if test="dzDh != null">#{dzDh,jdbcType=VARCHAR},</if>
+            <if test="status != null">#{status,jdbcType=INTEGER},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null">#{parm3,jdbcType=VARCHAR},</if>
+            <if test="parm4 != null">#{parm4,jdbcType=VARCHAR},</if>
+            <if test="parm5 != null">#{parm5,jdbcType=VARCHAR},</if>
+            <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="bz != null">#{bz,jdbcType=LONGVARCHAR},</if>
+        </trim>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpKpTop">
+        update cd_efp_kptop
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null and nsrmc != ''">nsrmc = #{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="khyhmcZh != null and khyhmcZh != ''">khyhmc_zh = #{khyhmcZh,jdbcType=VARCHAR},</if>
+            <if test="dzDh != null and dzDh != ''">dz_dh = #{dzDh,jdbcType=VARCHAR},</if>
+            <if test="status != null and status != ''">status = #{status,jdbcType=INTEGER},</if>
+            <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null and parm3 != ''">parm3 = #{parm3,jdbcType=VARCHAR},</if>
+            <if test="parm4 != null and parm4 != ''">parm4 = #{parm4,jdbcType=VARCHAR},</if>
+            <if test="parm5 != null and parm5 != ''">parm5 = #{parm5,jdbcType=VARCHAR},</if>
+            <if test="phone != null and phone != ''">phone = #{phone,jdbcType=VARCHAR},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="bz != null and bz != ''">bz = #{bz,jdbcType=LONGVARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectKpTops" resultType="java.util.HashMap">
+        select id, nsrsbh, nsrmc, khyhmc_zh, dz_dh, status, parm1, parm2, parm3, parm4, parm5,
+        phone, create_time, bz
+        from cd_efp_kptop
+        where phone = #{phone}
+        order by create_time desc
+        limit #{pageOff},#{pageSize}
+
+    </select>
+
+</mapper>

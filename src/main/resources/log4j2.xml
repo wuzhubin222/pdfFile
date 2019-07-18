@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorinterval="10">
+
+    <!--全异步需要配置一个环境变量,可在properties文件中配置,也可启动时使用JVM参数配置,也可设置系统环境变量-->
+    <!--log4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector-->
+    <!--/home/pdfLog D:/1-->
+   <!--本地日志路径  E:/11/pdf-->
+    <Properties>
+        <Property name="var.log.path.dir">/home/pdfLog</Property>
+        <Property name="var.output.pattern">%d %-5p [%t] %C{2} %M (%F:%L) - %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} %M (%F:%L) - %m%n"/>
+        </Console>
+        <File name="TEMP" fileName="temp">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} %M (%F:%L) - %m%n"/>
+        </File>
+        <Async name="ASYNC">
+            <AppenderRef ref="TEMP"/>
+            <AppenderRef ref="CONSOLE"/>
+        </Async>
+
+        <RollingRandomAccessFile bufferSize="1024" name="LogOutINFO" fileName="${var.log.path.dir}/output-INFO.log" filePattern="${var.log.path.dir}/log_INFO_storage/output-%d{yyyy-MM-dd}.log.%i">
+            <PatternLayout>
+                <Pattern>${var.output.pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+                <SizeBasedTriggeringPolicy size="20MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile bufferSize="1024" name="LogOutERROR" fileName="${var.log.path.dir}/output-ERROR.log" filePattern="${var.log.path.dir}/log_ERROR_storage/output-%d{yyyy-MM-dd}.log.%i">
+            <PatternLayout>
+                <Pattern>${var.output.pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+                <SizeBasedTriggeringPolicy size="20MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile bufferSize="1024" name="LogOutWARN" fileName="${var.log.path.dir}/output-WARN.log" filePattern="${var.log.path.dir}/log_WARN_storage/output-%d{yyyy-MM-dd}.log.%i">
+            <PatternLayout>
+                <Pattern>${var.output.pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+                <SizeBasedTriggeringPolicy size="20MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+
+        </RollingRandomAccessFile>
+
+    </Appenders>
+
+    <Logger name="org.apache.ibatis" level="INFO">
+        <AppenderRef ref="CONSOLE" />
+    </Logger>
+
+    <Logger name="org.apache.ibatis.jdbc.ScriptRunner" level="DEBUG">
+        <AppenderRef ref="CONSOLE" />
+    </Logger>
+
+    <Logger name="org.mybatis" level="TRACE">
+        <AppenderRef ref="CONSOLE" />
+    </Logger>
+
+    <Logger name="com.fpapi.dt.mapper" level="TRACE">
+        <AppenderRef ref="CONSOLE" />
+    </Logger>
+
+    <Logger name="java.sql" level="INFO">
+        <AppenderRef ref="CONSOLE" />
+    </Logger>
+
+    <Loggers>
+        <Root level="INFO" includeLocation="true">
+            <!--<AppenderRef ref="CONSOLE"/>-->
+            <!--<AppenderRef ref="TEMP"/>-->
+            <AppenderRef level="INFO" ref="LogOutINFO"/>
+            <AppenderRef level="WARN" ref="LogOutWARN"/>
+            <AppenderRef level="ERROR" ref="LogOutERROR"/>
+        </Root>
+
+        <!--<AsyncRoot level="INFO" includeLocation="true">-->
+        <!--&lt;!&ndash;<AppenderRef ref="TEMP"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<AppenderRef ref="CONSOLE"/>&ndash;&gt;-->
+        <!--<AppenderRef ref="LogOut"/>-->
+        <!--</AsyncRoot>-->
+    </Loggers>
+</Configuration>

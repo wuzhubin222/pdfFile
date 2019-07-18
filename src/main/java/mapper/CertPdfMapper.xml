@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.CertPdfMapper" >
+  <resultMap id="BaseResultMap" type="model.CertPdf" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR" />
+    <result column="pdf_url" property="pdfUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="parm1" property="parm1" jdbcType="VARCHAR" />
+    <result column="parm2" property="parm2" jdbcType="VARCHAR" />
+    <result column="parm3" property="parm3" jdbcType="VARCHAR" />
+    <result column="parm4" property="parm4" jdbcType="VARCHAR" />
+    <result column="parm5" property="parm5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nsrsbh, pdf_url, create_time, parm1, parm2, parm3, parm4, parm5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cert_pdf
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cert_pdf
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.CertPdf" >
+    insert into cert_pdf (id, nsrsbh, pdf_url, 
+      create_time, parm1, parm2, 
+      parm3, parm4, parm5
+      )
+    values (#{id,jdbcType=VARCHAR}, #{nsrsbh,jdbcType=VARCHAR}, #{pdfUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{parm1,jdbcType=VARCHAR}, #{parm2,jdbcType=VARCHAR}, 
+      #{parm3,jdbcType=VARCHAR}, #{parm4,jdbcType=VARCHAR}, #{parm5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.CertPdf" >
+    <selectKey keyProperty="id" order="BEFORE" resultType="String">
+      select replace(uuid(),'-','') from dual
+    </selectKey>
+    insert into cert_pdf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nsrsbh != null" >
+        nsrsbh,
+      </if>
+      <if test="pdfUrl != null" >
+        pdf_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="parm1 != null" >
+        parm1,
+      </if>
+      <if test="parm2 != null" >
+        parm2,
+      </if>
+      <if test="parm3 != null" >
+        parm3,
+      </if>
+      <if test="parm4 != null" >
+        parm4,
+      </if>
+      <if test="parm5 != null" >
+        parm5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="nsrsbh != null" >
+        #{nsrsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfUrl != null" >
+        #{pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parm1 != null" >
+        #{parm1,jdbcType=VARCHAR},
+      </if>
+      <if test="parm2 != null" >
+        #{parm2,jdbcType=VARCHAR},
+      </if>
+      <if test="parm3 != null" >
+        #{parm3,jdbcType=VARCHAR},
+      </if>
+      <if test="parm4 != null" >
+        #{parm4,jdbcType=VARCHAR},
+      </if>
+      <if test="parm5 != null" >
+        #{parm5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.CertPdf" >
+    update cert_pdf
+    <set >
+      <if test="nsrsbh != null" >
+        nsrsbh = #{nsrsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="pdfUrl != null" >
+        pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parm1 != null" >
+        parm1 = #{parm1,jdbcType=VARCHAR},
+      </if>
+      <if test="parm2 != null" >
+        parm2 = #{parm2,jdbcType=VARCHAR},
+      </if>
+      <if test="parm3 != null" >
+        parm3 = #{parm3,jdbcType=VARCHAR},
+      </if>
+      <if test="parm4 != null" >
+        parm4 = #{parm4,jdbcType=VARCHAR},
+      </if>
+      <if test="parm5 != null" >
+        parm5 = #{parm5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.CertPdf" >
+    update cert_pdf
+    set nsrsbh = #{nsrsbh,jdbcType=VARCHAR},
+      pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      parm1 = #{parm1,jdbcType=VARCHAR},
+      parm2 = #{parm2,jdbcType=VARCHAR},
+      parm3 = #{parm3,jdbcType=VARCHAR},
+      parm4 = #{parm4,jdbcType=VARCHAR},
+      parm5 = #{parm5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByParm2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    id, nsrsbh, pdf_url,  parm1, parm2, parm3, parm4,parm5
+    from cert_pdf
+    where parm2 = #{parm2,jdbcType=VARCHAR}
+  </select>
+
+
+  <update id="updateByParm2" parameterType="java.lang.String" >
+    update cert_pdf
+    <set>
+    <if test="pdfUrl != null" >
+      pdf_url = #{pdfUrl,jdbcType=VARCHAR},
+    </if>
+    <if test="parm3 != null" >
+      parm3 = #{parm3,jdbcType=VARCHAR},
+    </if>
+    <if test="parm5 != null" >
+      parm5 = #{parm5,jdbcType=VARCHAR},
+    </if>
+  </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://E:/apache-tomcat-8.5.4/lib" />
+      <root url="file://$PROJECT_DIR$/lib/phoneMsgSdk" />
+      <root url="file://$PROJECT_DIR$/lib/szca" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/phoneMsgSdk" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/szca" recursive="false" />
+    <jarDirectory url="file://E:/apache-tomcat-8.5.4/lib" recursive="false" />
+  </library>
+</component>

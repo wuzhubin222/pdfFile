@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.CdEfpMailmanageMapper" >
+  <resultMap id="BaseResultMap" type="model.CdEfpMailmanage" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="copyid" property="copyid" jdbcType="VARCHAR" />
+    <result column="fphm" property="fphm" jdbcType="VARCHAR" />
+    <result column="fpdm" property="fpdm" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="parm1" property="parm1" jdbcType="VARCHAR" />
+    <result column="parm2" property="parm2" jdbcType="VARCHAR" />
+    <result column="parm3" property="parm3" jdbcType="VARCHAR" />
+    <result column="parm4" property="parm4" jdbcType="VARCHAR" />
+    <result column="parm5" property="parm5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, copyid, fphm, fpdm, state, type, message, create_time, parm1, parm2, parm3, parm4, 
+    parm5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_efp_mailmanage
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cd_efp_mailmanage
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.CdEfpMailmanage" >
+    insert into cd_efp_mailmanage (id, copyid, fphm, 
+      fpdm, state, type, 
+      message, create_time, parm1, 
+      parm2, parm3, parm4, 
+      parm5)
+    values (#{id,jdbcType=VARCHAR}, #{copyid,jdbcType=VARCHAR}, #{fphm,jdbcType=VARCHAR}, 
+      #{fpdm,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{message,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{parm1,jdbcType=VARCHAR}, 
+      #{parm2,jdbcType=VARCHAR}, #{parm3,jdbcType=VARCHAR}, #{parm4,jdbcType=VARCHAR}, 
+      #{parm5,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="selectUrl" resultType="java.util.HashMap">
+    SELECT parm2 as `url`,id FROM `cd_efp_mailmanage` WHERE state=-1 and parm2 is not null
+  </select>
+
+  <update id="updateUrlsState">
+      update cd_efp_mailmanage set `state`=1 , message='重新推送'
+      where id in (
+        <foreach collection="items" item="item" separator="," >
+            #{item}
+        </foreach>
+      )
+
+  </update>
+
+</mapper>

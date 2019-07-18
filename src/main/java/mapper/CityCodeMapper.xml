@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.CityCodeMapper">
+    <resultMap id="BaseResultMap" type="model.CityCode">
+        <id column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from city_code
+    where code = #{code,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select code, province, city
+    from city_code
+  </select>
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.CityCode">
+        select code, province, city
+        from city_code
+        <where>
+            <if test="code != null">code = #{code,jdbcType=VARCHAR}</if>
+            <if test="province != null">and province = #{province,jdbcType=VARCHAR}</if>
+            <if test="city != null">and city = #{city,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="model.CityCode" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into city_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">code,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">#{code,jdbcType=VARCHAR},</if>
+            <if test="province != null">#{province,jdbcType=VARCHAR},</if>
+            <if test="city != null">#{city,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.CityCode">
+        update city_code
+        <set>
+            <if test="code != null and code != ''">code = #{code,jdbcType=VARCHAR},</if>
+            <if test="province != null and province != ''">province = #{province,jdbcType=VARCHAR},</if>
+            <if test="city != null and city != ''">city = #{city,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

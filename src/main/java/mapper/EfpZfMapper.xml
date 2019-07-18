@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpZfMapper">
+    <resultMap id="BaseResultMap" type="model.EfpZf">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="nsrmc" property="nsrmc" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="fpdm" property="fpdm" jdbcType="VARCHAR"/>
+        <result column="fphm" property="fphm" jdbcType="VARCHAR"/>
+        <result column="kjh" property="kjh" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+        <result column="parm3" property="parm3" jdbcType="VARCHAR"/>
+        <result column="parm4" property="parm4" jdbcType="VARCHAR"/>
+        <result column="parm5" property="parm5" jdbcType="VARCHAR"/>
+        <result column="message" property="message" jdbcType="VARCHAR"/>
+        <result column="parm6" property="parm6" jdbcType="VARCHAR"/>
+        <result column="parm7" property="parm7" jdbcType="VARCHAR"/>
+        <result column="parm8" property="parm8" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nsrmc, nsrsbh, fpdm, fphm, kjh, status, create_time,kjh, parm1, parm2, parm3, parm4,
+    parm5
+  </sql>
+
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpZf">
+        select id, fpdm, fphm, status, parm1, parm2,kjh, parm3, parm4, parm5,parm6, message,
+        create_time
+        from cd_efp_zf
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="fpdm != null">and fpdm = #{fpdm,jdbcType=VARCHAR}</if>
+            <if test="fphm != null">and fphm = #{fphm,jdbcType=VARCHAR}</if>
+            <if test="status != null and status != '' or status == 4">and status = #{status,jdbcType=INTEGER}</if>
+            <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+            <if test="parm3 != null">and parm3 = #{parm3,jdbcType=VARCHAR}</if>
+            <if test="parm4 != null">and parm4 = #{parm4,jdbcType=VARCHAR}</if>
+            <if test="parm5 != null">and parm5 = #{parm5,jdbcType=VARCHAR}</if>
+            <if test="parm6 != null">and parm6 = #{parm6,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+        ORDER by create_time desc;
+    </select>
+
+
+    <select id="selectnsrmc" resultType="java.lang.String">
+        select nsrmc from cd_efp_nsrdab where
+        nsrsbh=#{nsrsbh,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectGfmcByFpdmAndFphm" resultType="java.lang.String">
+        select gfmc from cd_efp_invoice where fphm=#{fphm} and fpdm=#{fpdm}
+    </select>
+
+
+    <insert id="insertInfo" parameterType="model.EfpZf" useGeneratedKeys="true">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into
+        cd_efp_zf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="nsrmc != null">nsrmc,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="fpdm != null">fpdm,</if>
+            <if test="fphm != null">fphm,</if>
+            <if test="status != null">status,</if>
+            <if test="kjh != null">kjh,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+            <if test="parm3 != null and parm3.length() > 0">
+                parm3,
+            </if>
+
+            <if test="parm4 != null and parm4.length() > 0">
+                parm4,
+            </if>
+            <if test="parm5 != null and parm5.length() > 0">
+                parm5,
+            </if>
+            <if test="message != null and message.length() > 0">
+                message,
+            </if>
+            <if test="parm6 != null and parm6.length() > 0">
+                parm6,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null">#{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null">#{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null">#{fphm,jdbcType=VARCHAR},</if>
+            <if test="status != null">#{status,jdbcType=INTEGER},</if>
+            <if test="kjh != null">#{kjh,jdbcType=INTEGER},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=INTEGER},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=INTEGER},</if>
+            <if test="parm3 != null and parm3.length() > 0">
+                #{parm3},
+            </if>
+            <if test="parm4 != null and parm4.length() > 0">
+                #{parm4},
+            </if>
+            <if test="parm5 != null and parm5.length() > 0">
+                #{parm5},
+            </if>
+            <if test="message != null and message.length() > 0">
+                #{message},
+            </if>
+            <if test="parm6 != null and parm6.length() > 0">
+                #{parm6},
+            </if>
+        </trim>
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="model.EfpZf">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into cd_efp_zf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="nsrmc != null">
+                nsrmc,
+            </if>
+            <if test="nsrsbh != null">
+                nsrsbh,
+            </if>
+            <if test="fpdm != null">
+                fpdm,
+            </if>
+            <if test="fphm != null">
+                fphm,
+            </if>
+            <if test="kjh != null">
+                kjh,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="parm1 != null">
+                parm1,
+            </if>
+            <if test="parm2 != null">
+                parm2,
+            </if>
+            <if test="parm3 != null">
+                parm3,
+            </if>
+            <if test="message != null">
+                message
+            </if>
+            <if test="parm4 != null">
+                parm4,
+            </if>
+            <if test="parm5 != null">
+                parm5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="nsrmc != null">
+                #{nsrmc,jdbcType=VARCHAR},
+            </if>
+            <if test="nsrsbh != null">
+                #{nsrsbh,jdbcType=VARCHAR},
+            </if>
+            <if test="fpdm != null">
+                #{fpdm,jdbcType=VARCHAR},
+            </if>
+            <if test="fphm != null">
+                #{fphm,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null">
+              #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="kjh != null">
+                #{kjh,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="parm1 != null">
+                #{parm1,jdbcType=VARCHAR},
+            </if>
+            <if test="parm2 != null">
+                #{parm2,jdbcType=VARCHAR},
+            </if>
+            <if test="parm3 != null">
+                #{parm3,jdbcType=VARCHAR},
+            </if>
+            <if test="parm4 != null">
+                #{parm4,jdbcType=VARCHAR},
+            </if>
+            <if test="parm5 != null">
+                #{parm5,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpZf">
+        update cd_efp_zf
+        <set>
+            <if test="nsrmc != null">
+                nsrmc = #{nsrmc,jdbcType=VARCHAR},
+            </if>
+            <if test="nsrsbh != null">
+                nsrsbh = #{nsrsbh,jdbcType=VARCHAR},
+            </if>
+            <if test="fpdm != null">
+                fpdm = #{fpdm,jdbcType=VARCHAR},
+            </if>
+            <if test="fphm != null">
+                fphm = #{fphm,jdbcType=VARCHAR},
+            </if>
+            <if test="kjh != null">
+                kjh = #{kjh,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="parm1 != null">
+                parm1 = #{parm1,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null">
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="parm2 != null">
+                parm2 = #{parm2,jdbcType=VARCHAR},
+            </if>
+            <if test="parm3 != null">
+                parm3 = #{parm3,jdbcType=VARCHAR},
+            </if>
+            <if test="parm4 != null">
+                parm4 = #{parm4,jdbcType=VARCHAR},
+            </if>
+            <if test="parm5 != null">
+                parm5 = #{parm5,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="model.EfpZf">
+    update cd_efp_zf
+    set nsrmc = #{nsrmc,jdbcType=VARCHAR},
+      nsrsbh = #{nsrsbh,jdbcType=VARCHAR},
+      fpdm = #{fpdm,jdbcType=VARCHAR},
+      fphm = #{fphm,jdbcType=VARCHAR},
+      kjh = #{kjh,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      message = #{message,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      parm1 = #{parm1,jdbcType=VARCHAR},
+      parm2 = #{parm2,jdbcType=VARCHAR},
+      parm3 = #{parm3,jdbcType=VARCHAR},
+      parm4 = #{parm4,jdbcType=VARCHAR},
+      parm5 = #{parm5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

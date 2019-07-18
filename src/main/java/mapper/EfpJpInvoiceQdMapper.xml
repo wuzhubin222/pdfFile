@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpJpInvoiceQdMapper">
+    <resultMap id="BaseResultMap" type="model.EfpJpInvoiceQd">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="fpdm" property="fpdm" jdbcType="CHAR"/>
+        <result column="fphm" property="fphm" jdbcType="CHAR"/>
+        <result column="wp_mc" property="wpMc" jdbcType="VARCHAR"/>
+        <result column="wp_xh" property="wpXh" jdbcType="VARCHAR"/>
+        <result column="wp_dw" property="wpDw" jdbcType="VARCHAR"/>
+        <result column="sl" property="sl" jdbcType="DECIMAL"/>
+        <result column="dj" property="dj" jdbcType="DECIMAL"/>
+        <result column="je" property="je" jdbcType="DECIMAL"/>
+        <result column="czdate" property="czdate" jdbcType="TIMESTAMP"/>
+        <result column="swjg_dm" property="swjgDm" jdbcType="VARCHAR"/>
+        <result column="xf_nsrsbh" property="xfNsrsbh" jdbcType="VARCHAR"/>
+        <result column="gf_nsrsbh" property="gfNsrsbh" jdbcType="VARCHAR"/>
+        <result column="wp_lb" property="wpLb" jdbcType="VARCHAR"/>
+        <result column="zfbz" property="zfbz" jdbcType="VARCHAR"/>
+        <result column="czdate_char" property="czdateChar" jdbcType="VARCHAR"/>
+        <result column="xhqd_bz" property="xhqdBz" jdbcType="VARCHAR"/>
+        <result column="slv" property="slv" jdbcType="DECIMAL"/>
+        <result column="fpqm_status" property="fpqmStatus" jdbcType="VARCHAR"/>
+        <result column="spbm" property="spbm" jdbcType="VARCHAR"/>
+        <result column="qyspbm" property="qyspbm" jdbcType="VARCHAR"/>
+        <result column="wpsl" property="wpsl" jdbcType="INTEGER"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_jp_invoice_qd
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, fpdm, fphm, wp_mc, wp_xh, wp_dw, sl, dj, je, czdate, swjg_dm, xf_nsrsbh, 
+    gf_nsrsbh, wp_lb, zfbz, czdate_char, xhqd_bz, slv, fpqm_status, spbm, qyspbm, wpsl, 
+    parm1, parm2
+    from cd_efp_jp_invoice_qd
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpJpInvoiceQd">
+        select id, fpdm, fphm, wp_mc, wp_xh, wp_dw, sl, dj, je, czdate, swjg_dm, xf_nsrsbh,
+        gf_nsrsbh, wp_lb, zfbz, czdate_char, xhqd_bz, slv, fpqm_status, spbm, qyspbm, wpsl,
+        parm1, parm2
+        from cd_efp_jp_invoice_qd
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="fpdm != null">and fpdm = #{fpdm,jdbcType=CHAR}</if>
+            <if test="fphm != null">and fphm = #{fphm,jdbcType=CHAR}</if>
+            <if test="wpMc != null">and wp_mc = #{wpMc,jdbcType=VARCHAR}</if>
+            <if test="wpXh != null">and wp_xh = #{wpXh,jdbcType=VARCHAR}</if>
+            <if test="wpDw != null">and wp_dw = #{wpDw,jdbcType=VARCHAR}</if>
+            <if test="sl != null">and sl = #{sl,jdbcType=DECIMAL}</if>
+            <if test="dj != null">and dj = #{dj,jdbcType=DECIMAL}</if>
+            <if test="je != null">and je = #{je,jdbcType=DECIMAL}</if>
+            <if test="czdate != null">and czdate = #{czdate,jdbcType=TIMESTAMP}</if>
+            <if test="swjgDm != null">and swjg_dm = #{swjgDm,jdbcType=VARCHAR}</if>
+            <if test="xfNsrsbh != null">and xf_nsrsbh = #{xfNsrsbh,jdbcType=VARCHAR}</if>
+            <if test="gfNsrsbh != null">and gf_nsrsbh = #{gfNsrsbh,jdbcType=VARCHAR}</if>
+            <if test="wpLb != null">and wp_lb = #{wpLb,jdbcType=VARCHAR}</if>
+            <if test="zfbz != null">and zfbz = #{zfbz,jdbcType=VARCHAR}</if>
+            <if test="czdateChar != null">and czdate_char = #{czdateChar,jdbcType=VARCHAR}</if>
+            <if test="xhqdBz != null">and xhqd_bz = #{xhqdBz,jdbcType=VARCHAR}</if>
+            <if test="slv != null">and slv = #{slv,jdbcType=DECIMAL}</if>
+            <if test="fpqmStatus != null">and fpqm_status = #{fpqmStatus,jdbcType=VARCHAR}</if>
+            <if test="spbm != null">and spbm = #{spbm,jdbcType=VARCHAR}</if>
+            <if test="qyspbm != null">and qyspbm = #{qyspbm,jdbcType=VARCHAR}</if>
+            <if test="wpsl != null">and wpsl = #{wpsl,jdbcType=INTEGER}</if>
+            <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpJpInvoiceQd" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_jp_invoice_qd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="fpdm != null">fpdm,</if>
+            <if test="fphm != null">fphm,</if>
+            <if test="wpMc != null">wp_mc,</if>
+            <if test="wpXh != null">wp_xh,</if>
+            <if test="wpDw != null">wp_dw,</if>
+            <if test="sl != null">sl,</if>
+            <if test="dj != null">dj,</if>
+            <if test="je != null">je,</if>
+            <if test="czdate != null">czdate,</if>
+            <if test="swjgDm != null">swjg_dm,</if>
+            <if test="xfNsrsbh != null">xf_nsrsbh,</if>
+            <if test="gfNsrsbh != null">gf_nsrsbh,</if>
+            <if test="wpLb != null">wp_lb,</if>
+            <if test="zfbz != null">zfbz,</if>
+            <if test="czdateChar != null">czdate_char,</if>
+            <if test="xhqdBz != null">xhqd_bz,</if>
+            <if test="slv != null">slv,</if>
+            <if test="fpqmStatus != null">fpqm_status,</if>
+            <if test="spbm != null">spbm,</if>
+            <if test="qyspbm != null">qyspbm,</if>
+            <if test="wpsl != null">wpsl,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null">#{fpdm,jdbcType=CHAR},</if>
+            <if test="fphm != null">#{fphm,jdbcType=CHAR},</if>
+            <if test="wpMc != null">#{wpMc,jdbcType=VARCHAR},</if>
+            <if test="wpXh != null">#{wpXh,jdbcType=VARCHAR},</if>
+            <if test="wpDw != null">#{wpDw,jdbcType=VARCHAR},</if>
+            <if test="sl != null">#{sl,jdbcType=DECIMAL},</if>
+            <if test="dj != null">#{dj,jdbcType=DECIMAL},</if>
+            <if test="je != null">#{je,jdbcType=DECIMAL},</if>
+            <if test="czdate != null">#{czdate,jdbcType=TIMESTAMP},</if>
+            <if test="swjgDm != null">#{swjgDm,jdbcType=VARCHAR},</if>
+            <if test="xfNsrsbh != null">#{xfNsrsbh,jdbcType=VARCHAR},</if>
+            <if test="gfNsrsbh != null">#{gfNsrsbh,jdbcType=VARCHAR},</if>
+            <if test="wpLb != null">#{wpLb,jdbcType=VARCHAR},</if>
+            <if test="zfbz != null">#{zfbz,jdbcType=VARCHAR},</if>
+            <if test="czdateChar != null">#{czdateChar,jdbcType=VARCHAR},</if>
+            <if test="xhqdBz != null">#{xhqdBz,jdbcType=VARCHAR},</if>
+            <if test="slv != null">#{slv,jdbcType=DECIMAL},</if>
+            <if test="fpqmStatus != null">#{fpqmStatus,jdbcType=VARCHAR},</if>
+            <if test="spbm != null">#{spbm,jdbcType=VARCHAR},</if>
+            <if test="qyspbm != null">#{qyspbm,jdbcType=VARCHAR},</if>
+            <if test="wpsl != null">#{wpsl,jdbcType=INTEGER},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpJpInvoiceQd">
+        update cd_efp_jp_invoice_qd
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null and fpdm != ''">fpdm = #{fpdm,jdbcType=CHAR},</if>
+            <if test="fphm != null and fphm != ''">fphm = #{fphm,jdbcType=CHAR},</if>
+            <if test="wpMc != null and wpMc != ''">wp_mc = #{wpMc,jdbcType=VARCHAR},</if>
+            <if test="wpXh != null and wpXh != ''">wp_xh = #{wpXh,jdbcType=VARCHAR},</if>
+            <if test="wpDw != null and wpDw != ''">wp_dw = #{wpDw,jdbcType=VARCHAR},</if>
+            <if test="sl != null and sl != ''">sl = #{sl,jdbcType=DECIMAL},</if>
+            <if test="dj != null and dj != ''">dj = #{dj,jdbcType=DECIMAL},</if>
+            <if test="je != null and je != ''">je = #{je,jdbcType=DECIMAL},</if>
+            <if test="czdate != null and czdate != ''">czdate = #{czdate,jdbcType=TIMESTAMP},</if>
+            <if test="swjgDm != null and swjgDm != ''">swjg_dm = #{swjgDm,jdbcType=VARCHAR},</if>
+            <if test="xfNsrsbh != null and xfNsrsbh != ''">xf_nsrsbh = #{xfNsrsbh,jdbcType=VARCHAR},</if>
+            <if test="gfNsrsbh != null and gfNsrsbh != ''">gf_nsrsbh = #{gfNsrsbh,jdbcType=VARCHAR},</if>
+            <if test="wpLb != null and wpLb != ''">wp_lb = #{wpLb,jdbcType=VARCHAR},</if>
+            <if test="zfbz != null and zfbz != ''">zfbz = #{zfbz,jdbcType=VARCHAR},</if>
+            <if test="czdateChar != null and czdateChar != ''">czdate_char = #{czdateChar,jdbcType=VARCHAR},</if>
+            <if test="xhqdBz != null and xhqdBz != ''">xhqd_bz = #{xhqdBz,jdbcType=VARCHAR},</if>
+            <if test="slv != null and slv != ''">slv = #{slv,jdbcType=DECIMAL},</if>
+            <if test="fpqmStatus != null and fpqmStatus != ''">fpqm_status = #{fpqmStatus,jdbcType=VARCHAR},</if>
+            <if test="spbm != null and spbm != ''">spbm = #{spbm,jdbcType=VARCHAR},</if>
+            <if test="qyspbm != null and qyspbm != ''">qyspbm = #{qyspbm,jdbcType=VARCHAR},</if>
+            <if test="wpsl != null and wpsl != ''">wpsl = #{wpsl,jdbcType=INTEGER},</if>
+            <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dao.CddfpsmsMapper">
+    <resultMap id="BaseResultMap" type="model.Cddfpsms">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nsrsbh" jdbcType="VARCHAR" property="nsrsbh"/>
+        <result column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="templateid" jdbcType="VARCHAR" property="templateid"/>
+        <result column="smsid" jdbcType="VARCHAR" property="smsid"/>
+        <result column="fromtype" jdbcType="INTEGER" property="fromtype"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="fee" jdbcType="DOUBLE" property="fee"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="message" jdbcType="VARCHAR" property="message"/>
+        <result column="parm1" jdbcType="VARCHAR" property="parm1"/>
+        <result column="parm2" jdbcType="VARCHAR" property="parm2"/>
+        <result column="parm3" jdbcType="VARCHAR" property="parm3"/>
+        <result column="parm4" jdbcType="VARCHAR" property="parm4"/>
+        <result column="parm5" jdbcType="VARCHAR" property="parm5"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="create_time"/>
+        <result column="receiveTime" jdbcType="TIMESTAMP" property="receive_time"/>
+    </resultMap>
+
+    <insert id="insertSms" parameterType="model.Cddfpsms" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        INSERT INTO cd_efp_sms (`id`,`nsrsbh`,`appid`,`templateid`,`fromtype`,`smsid`,`state`,`fee`,`mobile`,`message`,`receive_time`,`parm1`,`parm2`,`parm3`,`parm4`,`parm5`)
+        VALUES (#{id},#{nsrsbh},#{appid},#{templateid},#{fromtype},#{smsid},#{state},#{fee},#{mobile},#{message},#{receiveTime},#{parm1},#{parm2},#{parm3},#{parm4},#{parm5})
+    </insert>
+
+
+    <insert id="insertSmsMap" >
+        INSERT INTO cd_efp_sms (`id`,`nsrsbh`,`appid`,`templateid`,`fromtype`,`smsid`,`state`,`fee`,`mobile`,`message`,`receive_time`,`parm1`,`parm2`,`parm3`,`parm4`,`parm5`)
+        VALUES (#{id},#{nsrsbh},#{appid},#{templateid},#{fromtype},#{smsid},#{state},#{fee},#{mobile},#{message},#{receiveTime},#{parm1},#{parm2},#{parm3},#{parm4},#{parm5})
+    </insert>
+
+</mapper>

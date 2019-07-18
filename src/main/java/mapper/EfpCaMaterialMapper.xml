@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpCaMaterialMapper">
+    <resultMap id="BaseResultMap" type="model.EfpCaMaterial">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="nsrmc" property="nsrmc" jdbcType="VARCHAR"/>
+        <result column="yyzz_url" property="yyzzUrl" jdbcType="VARCHAR"/>
+        <result column="sfz_url" property="sfzUrl" jdbcType="VARCHAR"/>
+        <result column="sqb_url" property="sqbUrl" jdbcType="VARCHAR"/>
+        <result column="sqxy_url" property="sqxyUrl" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="seal_code" property="sealCode" jdbcType="VARCHAR"/>
+        <result column="ca_business_code" property="caBusinessCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_ca_material
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, nsrsbh, nsrmc, yyzz_url, sfz_url, sqb_url, sqxy_url, status, reason, seal_code, 
+    ca_business_code, create_time
+    from cd_efp_ca_material
+  </select>
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpCaMaterial">
+        select id, nsrsbh, nsrmc, yyzz_url, sfz_url, sqb_url, sqxy_url, status, reason, seal_code,
+        ca_business_code, create_time
+        from cd_efp_ca_material
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="nsrmc != null">and nsrmc = #{nsrmc,jdbcType=VARCHAR}</if>
+            <if test="yyzzUrl != null">and yyzz_url = #{yyzzUrl,jdbcType=VARCHAR}</if>
+            <if test="sfzUrl != null">and sfz_url = #{sfzUrl,jdbcType=VARCHAR}</if>
+            <if test="sqbUrl != null">and sqb_url = #{sqbUrl,jdbcType=VARCHAR}</if>
+            <if test="sqxyUrl != null">and sqxy_url = #{sqxyUrl,jdbcType=VARCHAR}</if>
+            <if test="status != null">and status = #{status,jdbcType=VARCHAR}</if>
+            <if test="reason != null">and reason = #{reason,jdbcType=VARCHAR}</if>
+            <if test="sealCode != null">and seal_code = #{sealCode,jdbcType=VARCHAR}</if>
+            <if test="caBusinessCode != null">and ca_business_code = #{caBusinessCode,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpCaMaterial" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_ca_material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="nsrmc != null">nsrmc,</if>
+            <if test="yyzzUrl != null">yyzz_url,</if>
+            <if test="sfzUrl != null">sfz_url,</if>
+            <if test="sqbUrl != null">sqb_url,</if>
+            <if test="sqxyUrl != null">sqxy_url,</if>
+            <if test="status != null">status,</if>
+            <if test="reason != null">reason,</if>
+            <if test="sealCode != null">seal_code,</if>
+            <if test="caBusinessCode != null">ca_business_code,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null">#{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="yyzzUrl != null">#{yyzzUrl,jdbcType=VARCHAR},</if>
+            <if test="sfzUrl != null">#{sfzUrl,jdbcType=VARCHAR},</if>
+            <if test="sqbUrl != null">#{sqbUrl,jdbcType=VARCHAR},</if>
+            <if test="sqxyUrl != null">#{sqxyUrl,jdbcType=VARCHAR},</if>
+            <if test="status != null">#{status,jdbcType=VARCHAR},</if>
+            <if test="reason != null">#{reason,jdbcType=VARCHAR},</if>
+            <if test="sealCode != null">#{sealCode,jdbcType=VARCHAR},</if>
+            <if test="caBusinessCode != null">#{caBusinessCode,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpCaMaterial">
+        update cd_efp_ca_material
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null and nsrmc != ''">nsrmc = #{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="yyzzUrl != null and yyzzUrl != ''">yyzz_url = #{yyzzUrl,jdbcType=VARCHAR},</if>
+            <if test="sfzUrl != null and sfzUrl != ''">sfz_url = #{sfzUrl,jdbcType=VARCHAR},</if>
+            <if test="sqbUrl != null and sqbUrl != ''">sqb_url = #{sqbUrl,jdbcType=VARCHAR},</if>
+            <if test="sqxyUrl != null and sqxyUrl != ''">sqxy_url = #{sqxyUrl,jdbcType=VARCHAR},</if>
+            <if test="status != null and status != ''">status = #{status,jdbcType=VARCHAR},</if>
+            <if test="reason != null and reason != ''">reason = #{reason,jdbcType=VARCHAR},</if>
+            <if test="sealCode != null and sealCode != ''">seal_code = #{sealCode,jdbcType=VARCHAR},</if>
+            <if test="caBusinessCode != null and caBusinessCode != ''">ca_business_code =
+                #{caBusinessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

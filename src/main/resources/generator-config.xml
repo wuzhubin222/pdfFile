@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!-- 数据库驱动jar包 -->
+    <classPathEntry location="D:\mysql-connector-java-5.0.8-bin.jar"/>
+
+    <context id="context" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <commentGenerator>
+            <!--去除生成的注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://testdata.mysql.rds.aliyuncs.com:3306/taxcloud_efp_ceshi" userId="liuzhiwei" password="Liuzhiwei6"/>
+
+        <!-- 生成实体类 -->
+        <javaModelGenerator targetPackage="model" targetProject="C:\Users\zccx\Desktop\pdfFileV2.0\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成mapper -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="C:\Users\zccx\Desktop\pdfFileV2.0\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 生成调用mapper的接口 -->
+        <javaClientGenerator targetPackage="Dao" targetProject="C:\Users\zccx\Desktop\pdfFileV2.0\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+        <!--<table tableName="cd_efp_user"  domainObjectName="EfpUser" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_invoice"  domainObjectName="EfpInvoice" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_xfzdab"  domainObjectName="EfpXfzdab" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_other_user"  domainObjectName="EfpOtherUser" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_kptop"  domainObjectName="EfpKpTop" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_filetree"  domainObjectName="EfpFileTree" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_invoice_copy"  domainObjectName="EfpInvoiceCopy" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_grspbm"  domainObjectName="EfpGrSpBm" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <!--<table tableName="cd_efp_nsrdab"  domainObjectName="EfpNsrDab" enableInsert="false"-->
+               <!--enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>-->
+
+        <table tableName="city_code"  domainObjectName="CityCode" enableInsert="false"
+               enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false"/>
+
+
+    </context>
+</generatorConfiguration>

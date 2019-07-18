@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpFileRepositoryMapper">
+    <resultMap id="BaseResultMap" type="model.EfpFileRepository">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="fpdm" property="fpdm" jdbcType="VARCHAR"/>
+        <result column="fphm" property="fphm" jdbcType="VARCHAR"/>
+        <result column="file_number" property="fileNumber" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+        <result column="parm3" property="parm3" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_file_repository
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, url, nsrsbh, fpdm, fphm, file_number, create_time, parm1, parm2, parm3
+    from cd_efp_file_repository
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpFileRepository">
+        select id, url, nsrsbh, fpdm, fphm, file_number, create_time, parm1, parm2, parm3
+        from cd_efp_file_repository
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="url != null">and url = #{url,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="fpdm != null">and fpdm = #{fpdm,jdbcType=VARCHAR}</if>
+            <if test="fphm != null">and fphm = #{fphm,jdbcType=VARCHAR}</if>
+            <if test="fileNumber != null">and file_number = #{fileNumber,jdbcType=INTEGER}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+            <if test="parm3 != null">and parm3 = #{parm3,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpFileRepository" useGeneratedKeys="true">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into cd_efp_file_repository
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="url != null">url,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="fpdm != null">fpdm,</if>
+            <if test="fphm != null">fphm,</if>
+            <if test="fileNumber != null">file_number,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+            <if test="parm3 != null">parm3,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="url != null">#{url,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null">#{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null">#{fphm,jdbcType=VARCHAR},</if>
+            <if test="fileNumber != null">#{fileNumber,jdbcType=INTEGER},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null">#{parm3,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpFileRepository">
+        update cd_efp_file_repository
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="url != null and url != ''">url = #{url,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null and fpdm != ''">fpdm = #{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null and fphm != ''">fphm = #{fphm,jdbcType=VARCHAR},</if>
+            <if test="fileNumber != null and fileNumber != ''">file_number = #{fileNumber,jdbcType=INTEGER},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null and parm3 != ''">parm3 = #{parm3,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

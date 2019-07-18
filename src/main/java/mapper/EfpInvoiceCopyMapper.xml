@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpInvoiceCopyMapper">
+    <resultMap id="BaseResultMap" type="model.EfpInvoiceCopy">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="fpdm" property="fpdm" jdbcType="VARCHAR"/>
+        <result column="fphm" property="fphm" jdbcType="VARCHAR"/>
+        <result column="bz" property="bz" jdbcType="INTEGER"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+        <result column="parm3" property="parm3" jdbcType="VARCHAR"/>
+        <result column="parm4" property="parm4" jdbcType="VARCHAR"/>
+        <result column="parm5" property="parm5" jdbcType="VARCHAR"/>
+        <result column="parm6" property="parm6" jdbcType="VARCHAR"/>
+        <result column="parm7" property="parm7" jdbcType="VARCHAR"/>
+        <result column="parm8" property="parm8" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updatetime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="kp_json" property="kpJson" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_invoice_copy
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, fpdm, fphm, bz, parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8, 
+    create_time, kp_json
+    from cd_efp_invoice_copy
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpInvoiceCopy">
+        select id, fpdm, fphm, bz, parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8,update_time,
+        create_time, kp_json,kjh
+        from cd_efp_invoice_copy
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="fpdm != null">and fpdm = #{fpdm,jdbcType=VARCHAR}</if>
+            <if test="fphm != null">and fphm = #{fphm,jdbcType=VARCHAR}</if>
+            <if test="bz != null and bz != '' or bz == 0">and bz = #{bz,jdbcType=INTEGER}</if>
+            <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+            <if test="parm3 != null">and parm3 = #{parm3,jdbcType=VARCHAR}</if>
+            <if test="parm4 != null">and parm4 = #{parm4,jdbcType=VARCHAR}</if>
+            <if test="parm5 != null">and parm5 = #{parm5,jdbcType=VARCHAR}</if>
+            <if test="parm6 != null">and parm6 = #{parm6,jdbcType=VARCHAR}</if>
+            <if test="parm7 != null">and parm7 = #{parm7,jdbcType=VARCHAR}</if>
+            <if test="parm8 != null">and parm8 = #{parm8,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+            <if test="kpJson != null">and kp_json = #{kpJson,jdbcType=LONGVARCHAR}</if>
+        </where>
+        ORDER by create_time desc;
+    </select>
+
+    <select id="selectSmsOrderbyNsrsbh" resultType="java.util.HashMap">
+    SELECT sms_num,sms_givenum FROM cd_efp_sms_order
+    WHERE nsrsbh= #{nsrsbh} AND parm3='dx'
+  </select>
+
+    <select id="selectbyPhone" resultType="java.util.HashMap">
+    SELECT parm3 FROM cd_efp_czydab
+    WHERE czy_id= #{phone}
+  </select>
+
+
+
+    <select id="selectInvoiceCopyList" resultType="java.util.HashMap">
+        select id, fpdm, fphm, bz, parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8,
+        create_time, kp_json
+        from cd_efp_invoice_copy
+        WHERE parm1 = #{parm1,jdbcType=VARCHAR} AND (bz = 4 OR bz = 6 OR bz = 7) limit #{pageOff},#{pageSize}
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpInvoiceCopy" useGeneratedKeys="true">
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into cd_efp_invoice_copy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="fpdm != null">fpdm,</if>
+            <if test="fphm != null">fphm,</if>
+            <if test="bz != null">bz,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+            <if test="parm3 != null">parm3,</if>
+            <if test="parm4 != null">parm4,</if>
+            <if test="parm5 != null">parm5,</if>
+            <if test="parm6 != null">parm6,</if>
+            <if test="parm7 != null">parm7,</if>
+            <if test="parm8 != null">parm8,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="kpJson != null">kp_json,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="fpdm != null">#{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null">#{fphm,jdbcType=VARCHAR},</if>
+            <if test="bz != null">#{bz,jdbcType=INTEGER},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null">#{parm3,jdbcType=VARCHAR},</if>
+            <if test="parm4 != null">#{parm4,jdbcType=VARCHAR},</if>
+            <if test="parm5 != null">#{parm5,jdbcType=VARCHAR},</if>
+            <if test="parm6 != null">#{parm6,jdbcType=VARCHAR},</if>
+            <if test="parm7 != null">#{parm7,jdbcType=VARCHAR},</if>
+            <if test="parm8 != null">#{parm8,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="kpJson != null">#{kpJson,jdbcType=LONGVARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpInvoiceCopy">
+        update cd_efp_invoice_copy
+        <set>
+            <if test="fpdm != null and fpdm != ''">fpdm = #{fpdm,jdbcType=VARCHAR},</if>
+            <if test="fphm != null and fphm != ''">fphm = #{fphm,jdbcType=VARCHAR},</if>
+            <if test="bz != null and bz != '' or bz == 0">bz = #{bz,jdbcType=INTEGER},</if>
+            <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null and parm3 != ''">parm3 = #{parm3,jdbcType=VARCHAR},</if>
+            <if test="parm4 != null and parm4 != ''">parm4 = #{parm4,jdbcType=VARCHAR},</if>
+            <if test="parm5 != null and parm5 != ''">parm5 = #{parm5,jdbcType=VARCHAR},</if>
+            <if test="parm6 != null and parm6 != ''">parm6 = #{parm6,jdbcType=VARCHAR},</if>
+            <if test="parm7 != null and parm7 != ''">parm7 = #{parm7,jdbcType=VARCHAR},</if>
+            <if test="parm8 != null and parm8 != ''">parm8 = #{parm8,jdbcType=VARCHAR},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="kpJson != null and kpJson != ''">kp_json = #{kpJson,jdbcType=LONGVARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="selectInvoiceCopysByOpenid" resultMap="BaseResultMap">
+    select id, fpdm, fphm, bz, parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8,
+    create_time, kp_json
+    from cd_efp_invoice_copy
+        where parm6 = #{openId} and bz = 7
+        order by create_time desc
+        limit #{pageOff},#{pageSize}
+    </select>
+
+    <select id="selectInvoiceCopysByNsrsbh" resultMap="BaseResultMap">
+        select id, fpdm, fphm, bz, parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8,
+        create_time, kp_json
+        from cd_efp_invoice_copy
+        where parm1 = #{nsrsbh} and bz = 7
+        order by create_time desc
+        limit #{pageOff},#{pageSize}
+    </select>
+
+    <select id="selectInvoiceCopysByPhoneOrOpenid" resultMap="BaseResultMap" >
+        select id, fpdm, fphm, bz, parm1, parm2, parm3, parm4, parm5, parm6, parm7, parm8,
+        create_time, kp_json
+        from cd_efp_invoice_copy
+        where (parm3 = #{phone} and bz = 7) or parm6 = #{openId}
+        order by create_time desc
+        limit #{pageOff},#{pageSize}
+    </select>
+
+    <!--<select id="selectCounts" resultType="java.lang.String">-->
+        <!--select COUNT(id) from cd_efp_invoice_copy GROUP BY parm1 = #{nsrsbh} AND bz = 4 OR bz = 6 OR bz = 7-->
+    <!--</select>-->
+
+</mapper>

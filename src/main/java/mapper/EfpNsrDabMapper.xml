@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpNsrDabMapper">
+    <resultMap id="BaseResultMap" type="model.EfpNsrDab">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="rd_swjg_dm" property="rdSwjgDm" jdbcType="VARCHAR"/>
+        <result column="rd_swjg_mc" property="rdSwjgMc" jdbcType="VARCHAR"/>
+        <result column="swjg_dm" property="swjgDm" jdbcType="VARCHAR"/>
+        <result column="swjg_mc" property="swjgMc" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="nsrmc" property="nsrmc" jdbcType="VARCHAR"/>
+        <result column="sq_rq" property="sqRq" jdbcType="DATE"/>
+        <result column="pz_rq" property="pzRq" jdbcType="DATE"/>
+        <result column="ls_ybnsr_bz" property="lsYbnsrBz" jdbcType="CHAR"/>
+        <result column="pz_fwsk_bz" property="pzFwskBz" jdbcType="CHAR"/>
+        <result column="pz_fwsk_rq" property="pzFwskRq" jdbcType="DATE"/>
+        <result column="frmc" property="frmc" jdbcType="VARCHAR"/>
+        <result column="hy_dm" property="hyDm" jdbcType="VARCHAR"/>
+        <result column="khyh_mc" property="khyhMc" jdbcType="VARCHAR"/>
+        <result column="yxbz" property="yxbz" jdbcType="CHAR"/>
+        <result column="jbr_dm" property="jbrDm" jdbcType="CHAR"/>
+        <result column="jbr_mc" property="jbrMc" jdbcType="VARCHAR"/>
+        <result column="nsr_xz" property="nsrXz" jdbcType="VARCHAR"/>
+        <result column="gdzc_bz" property="gdzcBz" jdbcType="VARCHAR"/>
+        <result column="nsr_fl" property="nsrFl" jdbcType="VARCHAR"/>
+        <result column="oldnsrsbh" property="oldnsrsbh" jdbcType="VARCHAR"/>
+        <result column="nsr_hy_sq" property="nsrHySq" jdbcType="VARCHAR"/>
+        <result column="tdqybz" property="tdqybz" jdbcType="CHAR"/>
+        <result column="ncpqybz" property="ncpqybz" jdbcType="CHAR"/>
+        <result column="sjbbz" property="sjbbz" jdbcType="CHAR"/>
+        <result column="tsnsrbz" property="tsnsrbz" jdbcType="CHAR"/>
+        <result column="xgmzpbz" property="xgmzpbz" jdbcType="CHAR"/>
+        <result column="xgmzp_qsrq" property="xgmzpQsrq" jdbcType="DATE"/>
+        <result column="xgmzp_zzrq" property="xgmzpZzrq" jdbcType="DATE"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="lxdz" property="lxdz" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="lxdh" property="lxdh" jdbcType="VARCHAR"/>
+        <result column="city_code" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="province_code" property="provinceCode" jdbcType="VARCHAR"/>
+        <result column="logo" property="logo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_nsrdab
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, rd_swjg_dm, rd_swjg_mc, swjg_dm, swjg_mc, nsrsbh, nsrmc, sq_rq, pz_rq, 
+    ls_ybnsr_bz, pz_fwsk_bz, pz_fwsk_rq, frmc, hy_dm, khyh_mc, yxbz, jbr_dm, jbr_mc, 
+    nsr_xz, gdzc_bz, nsr_fl, oldnsrsbh, nsr_hy_sq, tdqybz, ncpqybz, sjbbz, tsnsrbz, xgmzpbz, 
+    xgmzp_qsrq, xgmzp_zzrq, user_id, lxdz, type, lxdh, city_code, province_code, logo, 
+    create_time
+    from cd_efp_nsrdab
+  </select>
+
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpNsrDab">
+        select id, rd_swjg_dm, rd_swjg_mc, swjg_dm, swjg_mc, nsrsbh, nsrmc, sq_rq, pz_rq,
+        ls_ybnsr_bz, pz_fwsk_bz, pz_fwsk_rq, frmc, hy_dm, khyh_mc, yxbz, jbr_dm, jbr_mc,
+        nsr_xz, gdzc_bz, nsr_fl, oldnsrsbh, nsr_hy_sq, tdqybz, ncpqybz, sjbbz, tsnsrbz, xgmzpbz,
+        xgmzp_qsrq, xgmzp_zzrq, user_id, lxdz, type, lxdh, city_code, province_code, logo,smstype,
+        create_time
+        from cd_efp_nsrdab
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="rdSwjgDm != null">and rd_swjg_dm = #{rdSwjgDm,jdbcType=VARCHAR}</if>
+            <if test="rdSwjgMc != null">and rd_swjg_mc = #{rdSwjgMc,jdbcType=VARCHAR}</if>
+            <if test="swjgDm != null">and swjg_dm = #{swjgDm,jdbcType=VARCHAR}</if>
+            <if test="swjgMc != null">and swjg_mc = #{swjgMc,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="nsrmc != null">and nsrmc = #{nsrmc,jdbcType=VARCHAR}</if>
+            <if test="sqRq != null">and sq_rq = #{sqRq,jdbcType=DATE}</if>
+            <if test="pzRq != null">and pz_rq = #{pzRq,jdbcType=DATE}</if>
+            <if test="lsYbnsrBz != null">and ls_ybnsr_bz = #{lsYbnsrBz,jdbcType=CHAR}</if>
+            <if test="pzFwskBz != null">and pz_fwsk_bz = #{pzFwskBz,jdbcType=CHAR}</if>
+            <if test="pzFwskRq != null">and pz_fwsk_rq = #{pzFwskRq,jdbcType=DATE}</if>
+            <if test="frmc != null">and frmc = #{frmc,jdbcType=VARCHAR}</if>
+            <if test="hyDm != null">and hy_dm = #{hyDm,jdbcType=VARCHAR}</if>
+            <if test="khyhMc != null">and khyh_mc = #{khyhMc,jdbcType=VARCHAR}</if>
+            <if test="yxbz != null">and yxbz = #{yxbz,jdbcType=CHAR}</if>
+            <if test="jbrDm != null">and jbr_dm = #{jbrDm,jdbcType=CHAR}</if>
+            <if test="jbrMc != null">and jbr_mc = #{jbrMc,jdbcType=VARCHAR}</if>
+            <if test="nsrXz != null">and nsr_xz = #{nsrXz,jdbcType=VARCHAR}</if>
+            <if test="gdzcBz != null">and gdzc_bz = #{gdzcBz,jdbcType=VARCHAR}</if>
+            <if test="nsrFl != null">and nsr_fl = #{nsrFl,jdbcType=VARCHAR}</if>
+            <if test="oldnsrsbh != null">and oldnsrsbh = #{oldnsrsbh,jdbcType=VARCHAR}</if>
+            <if test="nsrHySq != null">and nsr_hy_sq = #{nsrHySq,jdbcType=VARCHAR}</if>
+            <if test="tdqybz != null">and tdqybz = #{tdqybz,jdbcType=CHAR}</if>
+            <if test="ncpqybz != null">and ncpqybz = #{ncpqybz,jdbcType=CHAR}</if>
+            <if test="sjbbz != null">and sjbbz = #{sjbbz,jdbcType=CHAR}</if>
+            <if test="tsnsrbz != null">and tsnsrbz = #{tsnsrbz,jdbcType=CHAR}</if>
+            <if test="xgmzpbz != null">and xgmzpbz = #{xgmzpbz,jdbcType=CHAR}</if>
+            <if test="xgmzpQsrq != null">and xgmzp_qsrq = #{xgmzpQsrq,jdbcType=DATE}</if>
+            <if test="xgmzpZzrq != null">and xgmzp_zzrq = #{xgmzpZzrq,jdbcType=DATE}</if>
+            <if test="userId != null">and user_id = #{userId,jdbcType=VARCHAR}</if>
+            <if test="lxdz != null">and lxdz = #{lxdz,jdbcType=VARCHAR}</if>
+            <if test="type != null">and type = #{type,jdbcType=INTEGER}</if>
+            <if test="lxdh != null">and lxdh = #{lxdh,jdbcType=VARCHAR}</if>
+            <if test="cityCode != null">and city_code = #{cityCode,jdbcType=VARCHAR}</if>
+            <if test="provinceCode != null">and province_code = #{provinceCode,jdbcType=VARCHAR}</if>
+            <if test="logo != null">and logo = #{logo,jdbcType=VARCHAR}</if>
+            <if test="createTime != null">and create_time = #{createTime,jdbcType=TIMESTAMP}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpNsrDab" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="rdSwjgDm != null">rd_swjg_dm,</if>
+            <if test="rdSwjgMc != null">rd_swjg_mc,</if>
+            <if test="swjgDm != null">swjg_dm,</if>
+            <if test="swjgMc != null">swjg_mc,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="nsrmc != null">nsrmc,</if>
+            <if test="sqRq != null">sq_rq,</if>
+            <if test="pzRq != null">pz_rq,</if>
+            <if test="lsYbnsrBz != null">ls_ybnsr_bz,</if>
+            <if test="pzFwskBz != null">pz_fwsk_bz,</if>
+            <if test="pzFwskRq != null">pz_fwsk_rq,</if>
+            <if test="frmc != null">frmc,</if>
+            <if test="hyDm != null">hy_dm,</if>
+            <if test="khyhMc != null">khyh_mc,</if>
+            <if test="yxbz != null">yxbz,</if>
+            <if test="jbrDm != null">jbr_dm,</if>
+            <if test="jbrMc != null">jbr_mc,</if>
+            <if test="nsrXz != null">nsr_xz,</if>
+            <if test="gdzcBz != null">gdzc_bz,</if>
+            <if test="nsrFl != null">nsr_fl,</if>
+            <if test="oldnsrsbh != null">oldnsrsbh,</if>
+            <if test="nsrHySq != null">nsr_hy_sq,</if>
+            <if test="tdqybz != null">tdqybz,</if>
+            <if test="ncpqybz != null">ncpqybz,</if>
+            <if test="sjbbz != null">sjbbz,</if>
+            <if test="tsnsrbz != null">tsnsrbz,</if>
+            <if test="xgmzpbz != null">xgmzpbz,</if>
+            <if test="xgmzpQsrq != null">xgmzp_qsrq,</if>
+            <if test="xgmzpZzrq != null">xgmzp_zzrq,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="lxdz != null">lxdz,</if>
+            <if test="type != null">type,</if>
+            <if test="lxdh != null">lxdh,</if>
+            <if test="cityCode != null">city_code,</if>
+            <if test="provinceCode != null">province_code,</if>
+            <if test="logo != null">logo,</if>
+            <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="rdSwjgDm != null">#{rdSwjgDm,jdbcType=VARCHAR},</if>
+            <if test="rdSwjgMc != null">#{rdSwjgMc,jdbcType=VARCHAR},</if>
+            <if test="swjgDm != null">#{swjgDm,jdbcType=VARCHAR},</if>
+            <if test="swjgMc != null">#{swjgMc,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null">#{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="sqRq != null">#{sqRq,jdbcType=DATE},</if>
+            <if test="pzRq != null">#{pzRq,jdbcType=DATE},</if>
+            <if test="lsYbnsrBz != null">#{lsYbnsrBz,jdbcType=CHAR},</if>
+            <if test="pzFwskBz != null">#{pzFwskBz,jdbcType=CHAR},</if>
+            <if test="pzFwskRq != null">#{pzFwskRq,jdbcType=DATE},</if>
+            <if test="frmc != null">#{frmc,jdbcType=VARCHAR},</if>
+            <if test="hyDm != null">#{hyDm,jdbcType=VARCHAR},</if>
+            <if test="khyhMc != null">#{khyhMc,jdbcType=VARCHAR},</if>
+            <if test="yxbz != null">#{yxbz,jdbcType=CHAR},</if>
+            <if test="jbrDm != null">#{jbrDm,jdbcType=CHAR},</if>
+            <if test="jbrMc != null">#{jbrMc,jdbcType=VARCHAR},</if>
+            <if test="nsrXz != null">#{nsrXz,jdbcType=VARCHAR},</if>
+            <if test="gdzcBz != null">#{gdzcBz,jdbcType=VARCHAR},</if>
+            <if test="nsrFl != null">#{nsrFl,jdbcType=VARCHAR},</if>
+            <if test="oldnsrsbh != null">#{oldnsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrHySq != null">#{nsrHySq,jdbcType=VARCHAR},</if>
+            <if test="tdqybz != null">#{tdqybz,jdbcType=CHAR},</if>
+            <if test="ncpqybz != null">#{ncpqybz,jdbcType=CHAR},</if>
+            <if test="sjbbz != null">#{sjbbz,jdbcType=CHAR},</if>
+            <if test="tsnsrbz != null">#{tsnsrbz,jdbcType=CHAR},</if>
+            <if test="xgmzpbz != null">#{xgmzpbz,jdbcType=CHAR},</if>
+            <if test="xgmzpQsrq != null">#{xgmzpQsrq,jdbcType=DATE},</if>
+            <if test="xgmzpZzrq != null">#{xgmzpZzrq,jdbcType=DATE},</if>
+            <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+            <if test="lxdz != null">#{lxdz,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=INTEGER},</if>
+            <if test="lxdh != null">#{lxdh,jdbcType=VARCHAR},</if>
+            <if test="cityCode != null">#{cityCode,jdbcType=VARCHAR},</if>
+            <if test="provinceCode != null">#{provinceCode,jdbcType=VARCHAR},</if>
+            <if test="logo != null">#{logo,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+        insert into cd_efp_nsrdab
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpNsrDab">
+        update cd_efp_nsrdab
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="rdSwjgDm != null and rdSwjgDm != ''">rd_swjg_dm = #{rdSwjgDm,jdbcType=VARCHAR},</if>
+            <if test="rdSwjgMc != null and rdSwjgMc != ''">rd_swjg_mc = #{rdSwjgMc,jdbcType=VARCHAR},</if>
+            <if test="swjgDm != null and swjgDm != ''">swjg_dm = #{swjgDm,jdbcType=VARCHAR},</if>
+            <if test="swjgMc != null and swjgMc != ''">swjg_mc = #{swjgMc,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrmc != null and nsrmc != ''">nsrmc = #{nsrmc,jdbcType=VARCHAR},</if>
+            <if test="sqRq != null and sqRq != ''">sq_rq = #{sqRq,jdbcType=DATE},</if>
+            <if test="pzRq != null and pzRq != ''">pz_rq = #{pzRq,jdbcType=DATE},</if>
+            <if test="lsYbnsrBz != null and lsYbnsrBz != ''">ls_ybnsr_bz = #{lsYbnsrBz,jdbcType=CHAR},</if>
+            <if test="pzFwskBz != null and pzFwskBz != ''">pz_fwsk_bz = #{pzFwskBz,jdbcType=CHAR},</if>
+            <if test="pzFwskRq != null and pzFwskRq != ''">pz_fwsk_rq = #{pzFwskRq,jdbcType=DATE},</if>
+            <if test="frmc != null and frmc != ''">frmc = #{frmc,jdbcType=VARCHAR},</if>
+            <if test="hyDm != null and hyDm != ''">hy_dm = #{hyDm,jdbcType=VARCHAR},</if>
+            <if test="khyhMc != null and khyhMc != ''">khyh_mc = #{khyhMc,jdbcType=VARCHAR},</if>
+            <if test="yxbz != null and yxbz != ''">yxbz = #{yxbz,jdbcType=CHAR},</if>
+            <if test="jbrDm != null and jbrDm != ''">jbr_dm = #{jbrDm,jdbcType=CHAR},</if>
+            <if test="jbrMc != null and jbrMc != ''">jbr_mc = #{jbrMc,jdbcType=VARCHAR},</if>
+            <if test="nsrXz != null and nsrXz != ''">nsr_xz = #{nsrXz,jdbcType=VARCHAR},</if>
+            <if test="gdzcBz != null and gdzcBz != ''">gdzc_bz = #{gdzcBz,jdbcType=VARCHAR},</if>
+            <if test="nsrFl != null and nsrFl != ''">nsr_fl = #{nsrFl,jdbcType=VARCHAR},</if>
+            <if test="oldnsrsbh != null and oldnsrsbh != ''">oldnsrsbh = #{oldnsrsbh,jdbcType=VARCHAR},</if>
+            <if test="nsrHySq != null and nsrHySq != ''">nsr_hy_sq = #{nsrHySq,jdbcType=VARCHAR},</if>
+            <if test="tdqybz != null and tdqybz != ''">tdqybz = #{tdqybz,jdbcType=CHAR},</if>
+            <if test="ncpqybz != null and ncpqybz != ''">ncpqybz = #{ncpqybz,jdbcType=CHAR},</if>
+            <if test="sjbbz != null and sjbbz != ''">sjbbz = #{sjbbz,jdbcType=CHAR},</if>
+            <if test="tsnsrbz != null and tsnsrbz != ''">tsnsrbz = #{tsnsrbz,jdbcType=CHAR},</if>
+            <if test="xgmzpbz != null and xgmzpbz != ''">xgmzpbz = #{xgmzpbz,jdbcType=CHAR},</if>
+            <if test="xgmzpQsrq != null and xgmzpQsrq != ''">xgmzp_qsrq = #{xgmzpQsrq,jdbcType=DATE},</if>
+            <if test="xgmzpZzrq != null and xgmzpZzrq != ''">xgmzp_zzrq = #{xgmzpZzrq,jdbcType=DATE},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId,jdbcType=VARCHAR},</if>
+            <if test="lxdz != null and lxdz != ''">lxdz = #{lxdz,jdbcType=VARCHAR},</if>
+            <if test="type != null and type != ''">type = #{type,jdbcType=INTEGER},</if>
+            <if test="lxdh != null and lxdh != ''">lxdh = #{lxdh,jdbcType=VARCHAR},</if>
+            <if test="cityCode != null and cityCode != ''">city_code = #{cityCode,jdbcType=VARCHAR},</if>
+            <if test="provinceCode != null and provinceCode != ''">province_code = #{provinceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null and logo != ''">logo = #{logo,jdbcType=VARCHAR},</if>
+            <if test="createTime != null and createTime != ''">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+
+    <update id="updateByPrimary" parameterType="model.EfpNsrDab">
+        update cd_efp_nsrdab SET smstype =1
+        where nsrsbh = #{nsrsbh,jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>

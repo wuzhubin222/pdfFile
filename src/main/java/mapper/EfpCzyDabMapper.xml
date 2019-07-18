@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Dao.EfpCzyDabMapper">
+    <resultMap id="BaseResultMap" type="model.EfpCzyDab">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="nsrsbh" property="nsrsbh" jdbcType="VARCHAR"/>
+        <result column="czy_id" property="czyId" jdbcType="VARCHAR"/>
+        <result column="czy_name" property="czyName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="logintime" property="logintime" jdbcType="TIMESTAMP"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="parm1" property="parm1" jdbcType="VARCHAR"/>
+        <result column="parm2" property="parm2" jdbcType="VARCHAR"/>
+        <result column="parm3" property="parm3" jdbcType="VARCHAR"/>
+        <result column="parm4" property="parm4" jdbcType="VARCHAR"/>
+        <result column="parm5" property="parm5" jdbcType="VARCHAR"/>
+        <result column="parm6" property="parm6" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cd_efp_czydab
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, nsrsbh, czy_id, czy_name, password, type, status, logintime, email, parm1, 
+    parm2, parm3, parm4, parm5, parm6
+    from cd_efp_czydab
+  </select>
+
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="model.EfpCzyDab">
+        select id, nsrsbh, czy_id, czy_name, password, type, status, logintime, email, parm1,
+        parm2, parm3, parm4, parm5, parm6
+        from cd_efp_czydab
+
+        <where>
+            <if test="id != null">id = #{id,jdbcType=VARCHAR}</if>
+            <if test="id != null">and id = #{id,jdbcType=VARCHAR}</if>
+            <if test="nsrsbh != null">and nsrsbh = #{nsrsbh,jdbcType=VARCHAR}</if>
+            <if test="czyId != null">and czy_id = #{czyId,jdbcType=VARCHAR}</if>
+            <if test="czyName != null">and czy_name = #{czyName,jdbcType=VARCHAR}</if>
+            <if test="password != null">and password = #{password,jdbcType=VARCHAR}</if>
+            <if test="type != null">and type = #{type,jdbcType=INTEGER}</if>
+            <if test="status != null">and status = #{status,jdbcType=INTEGER}</if>
+            <if test="logintime != null">and logintime = #{logintime,jdbcType=TIMESTAMP}</if>
+            <if test="email != null">and email = #{email,jdbcType=VARCHAR}</if>
+            <if test="parm1 != null">and parm1 = #{parm1,jdbcType=VARCHAR}</if>
+            <if test="parm2 != null">and parm2 = #{parm2,jdbcType=VARCHAR}</if>
+            <if test="parm3 != null">and parm3 = #{parm3,jdbcType=VARCHAR}</if>
+            <if test="parm4 != null">and parm4 = #{parm4,jdbcType=VARCHAR}</if>
+            <if test="parm5 != null">and parm5 = #{parm5,jdbcType=VARCHAR}</if>
+            <if test="parm6 != null">and parm6 = #{parm6,jdbcType=VARCHAR}</if>
+        </where>
+
+    </select>
+
+    <insert id="insertSelective" parameterType="model.EfpCzyDab" useGeneratedKeys="true">
+
+        <selectKey keyProperty="id" order="BEFORE" resultType="String">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+
+        insert into cd_efp_czydab
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="nsrsbh != null">nsrsbh,</if>
+            <if test="czyId != null">czy_id,</if>
+            <if test="czyName != null">czy_name,</if>
+            <if test="password != null">password,</if>
+            <if test="type != null">type,</if>
+            <if test="status != null">status,</if>
+            <if test="logintime != null">logintime,</if>
+            <if test="email != null">email,</if>
+            <if test="parm1 != null">parm1,</if>
+            <if test="parm2 != null">parm2,</if>
+            <if test="parm3 != null">parm3,</if>
+            <if test="parm4 != null">parm4,</if>
+            <if test="parm5 != null">parm5,</if>
+            <if test="parm6 != null">parm6,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null">#{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="czyId != null">#{czyId,jdbcType=VARCHAR},</if>
+            <if test="czyName != null">#{czyName,jdbcType=VARCHAR},</if>
+            <if test="password != null">#{password,jdbcType=VARCHAR},</if>
+            <if test="type != null">#{type,jdbcType=INTEGER},</if>
+            <if test="status != null">#{status,jdbcType=INTEGER},</if>
+            <if test="logintime != null">#{logintime,jdbcType=TIMESTAMP},</if>
+            <if test="email != null">#{email,jdbcType=VARCHAR},</if>
+            <if test="parm1 != null">#{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null">#{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null">#{parm3,jdbcType=VARCHAR},</if>
+            <if test="parm4 != null">#{parm4,jdbcType=VARCHAR},</if>
+            <if test="parm5 != null">#{parm5,jdbcType=VARCHAR},</if>
+            <if test="parm6 != null">#{parm6,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="model.EfpCzyDab">
+        update cd_efp_czydab
+        <set>
+            <if test="id != null and id != ''">id = #{id,jdbcType=VARCHAR},</if>
+            <if test="nsrsbh != null and nsrsbh != ''">nsrsbh = #{nsrsbh,jdbcType=VARCHAR},</if>
+            <if test="czyId != null and czyId != ''">czy_id = #{czyId,jdbcType=VARCHAR},</if>
+            <if test="czyName != null and czyName != ''">czy_name = #{czyName,jdbcType=VARCHAR},</if>
+            <if test="password != null and password != ''">password = #{password,jdbcType=VARCHAR},</if>
+            <if test="type != null and type != ''">type = #{type,jdbcType=INTEGER},</if>
+            <if test="status != null and status != ''">status = #{status,jdbcType=INTEGER},</if>
+            <if test="logintime != null and logintime != ''">logintime = #{logintime,jdbcType=TIMESTAMP},</if>
+            <if test="email != null and email != ''">email = #{email,jdbcType=VARCHAR},</if>
+            <if test="parm1 != null and parm1 != ''">parm1 = #{parm1,jdbcType=VARCHAR},</if>
+            <if test="parm2 != null and parm2 != ''">parm2 = #{parm2,jdbcType=VARCHAR},</if>
+            <if test="parm3 != null and parm3 != ''">parm3 = #{parm3,jdbcType=VARCHAR},</if>
+            <if test="parm4 != null and parm4 != ''">parm4 = #{parm4,jdbcType=VARCHAR},</if>
+            <if test="parm5 != null and parm5 != ''">parm5 = #{parm5,jdbcType=VARCHAR},</if>
+            <if test="parm6 != null and parm6 != ''">parm6 = #{parm6,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
