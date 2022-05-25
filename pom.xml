@@ -30,7 +30,7 @@
     </build>
 
     <properties>
-        <spring.version>4.3.2.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
         <mybatis.version>3.4.1</mybatis.version>
     </properties>
 
