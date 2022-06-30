@@ -219,7 +219,7 @@
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.5.5</version>
+            <version>5.5.12</version>
         </dependency>
         <!-- pdf文件字体 -->
         <dependency>
@@ -307,12 +307,12 @@
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.2.1</version>
+            <version>5.5.12</version>
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
-            <version>5.5.5</version>
+            <version>5.5.12</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
